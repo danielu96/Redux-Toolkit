@@ -1,6 +1,6 @@
 import React from 'react'
 import { configureStore, createReducer } from '@reduxjs/toolkit'
-import taskReducer from '../Cart/cartSlice';
+import taskReducer from './Slices/taskReducer';
 
 const store = configureStore({
   reducer: {
