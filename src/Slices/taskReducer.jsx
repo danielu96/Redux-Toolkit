@@ -12,11 +12,14 @@ const taskReducer = createSlice ({
     AddTask: ( state, action ) => {       
       state.tasks.push(action.payload)
       // state.tasks= action.payload.tasks
-       }      
+       }  ,
+       removeTask:(state,action)  =>{
+       state.tasks =  state.tasks.filter((task) => task.id !== action.payload);
+       } 
           
     },
 
   }
 )
-export const {AddTask} = taskReducer.actions;
+export const {AddTask,removeTask} = taskReducer.actions;
 export default taskReducer.reducer
