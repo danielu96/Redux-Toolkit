@@ -1,16 +1,36 @@
-import { useState,useRef } from 'react'
+import { useState,useEffect} from 'react'
 import Alert from './Alert'
 import './App.css'
 import ToDo from './ToDo'
 import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
-import { AddTask } from './Slices/taskReducer';
+import ReactPaginate from 'react-paginate';
 
 
 function App() {
-  const inputRef = useRef()
-  const  tasks  = useSelector((state) => state.task.tasks);
-  const dispatch = useDispatch();
+   const  tasks  = useSelector((state) => state.task.tasks);
+   const [currentItems, setCurrentItems] = useState([]);  
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(tasks.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(tasks.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage,
+    tasks
+  ]);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) %
+      tasks.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+
   // const handleSubmit =(e) => {
   //   e.preventDefault();
   //   if(inputRef.current.value.trim()){
@@ -47,7 +67,7 @@ function App() {
 
 
    <div  style={{height:'220px'}}>
-      {tasks.map((task,id) => (
+      { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
         {...task}  content={task.content}
@@ -58,6 +78,24 @@ function App() {
          ))} 
      {/* <button onClick={()=> clearItems()}>clear all</button> */}
 </div>
+<div style={{top:'1rem'}}>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination"}
+        pageLinkClassName={"page-num"}
+        previousLinkClassName={"page-num"}
+        nextLinkClassName={"page-num"}
+        disabledClassName={"disabled"}
+        activeClassName={"active"}
+
+      />
+      </div>
     </div>
   )
 }
