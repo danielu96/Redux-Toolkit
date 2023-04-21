@@ -40,3 +40,58 @@
 .read-the-docs {
   color: #888;
 }
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.pagination .page-num {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+.pagination .page-num:hover {
+  background-color: #26769e;
+  color: #feffff;
+}
+
+.pagination .active {
+  background-color: lightgray;
+  border-radius: 8px;
+}
+
+@media only screen and (max-width: 889px) {
+  .pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    gap: 5px;
+  }
+
+  .pagination .page-num {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+  }
+
+  .pagination .page-num:hover {
+    background-color: #26769e;
+    color: #feffff;
+  }
+
+  .pagination .active {
+    background-color: lightgray;
+    border-radius: 8px;
+  }
+}
