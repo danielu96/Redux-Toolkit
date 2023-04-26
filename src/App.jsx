@@ -5,10 +5,12 @@ import ToDo from './ToDo'
 import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
+import { clearTasks } from './Slices/taskReducer'
 
 
 function App() {
    const  tasks  = useSelector((state) => state.task.tasks);
+   const dispatch= useDispatch()
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -78,6 +80,10 @@ function App() {
          ))} 
      {/* <button onClick={()=> clearItems()}>clear all</button> */}
 </div>
+<button onClick={()=>
+  dispatch(clearTasks())}>clear all</button>
+{/* <button className='btn-clear' onClick={() =>
+                            dispatch(openModal())}>Clear Cart</button> */}
 <div style={{top:'1rem'}}>
       <ReactPaginate
         breakLabel="..."
