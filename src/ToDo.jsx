@@ -16,11 +16,13 @@ const ToDo = () => {
     const dispatch = useDispatch();
     const handleSubmit =(e) => {
       e.preventDefault();
-      
+      showAlert(true, 'danger', 'you must enter value')
       if(inputRef.current.value.trim()){
+        showAlert(true, 'success', 'you added new value')
         dispatch(AddTask({
           id:Math.random()* 1000 ,
           content:inputRef.current.value,
+          done:false,
         }))
         console.log(inputRef.current.value);
       }
@@ -47,7 +49,7 @@ const ToDo = () => {
   //      ));
       
   //       setTaskName('');
-  //       // alert('Succes you just added')    
+  //       // alert('Success you just added')    
   //          }
   return  ( 
     <div>
