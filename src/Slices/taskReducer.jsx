@@ -29,11 +29,10 @@ const taskReducer = createSlice ({
        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
         (item => item)))
        } ,
-
-
-
        renameTask:(state,action)  =>{
         console.log(action)
+        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+          (item => item)))
 // state.tasks= state.tasks.map(i=> i.id=== action.payload.id ? action.payload :i)
 // state.tasks = state.tasks.filter(task => task.id === action.payload);
 // return state
