@@ -95,3 +95,9 @@
     border-radius: 8px;
   }
 }
+.undone{
+  color: red;
+}
+.danger{
+  color: red;
+}
