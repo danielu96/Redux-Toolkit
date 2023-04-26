@@ -17,6 +17,7 @@ function App() {
   const itemsPerPage = 3;
 
   useEffect(() => {
+    
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(tasks.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(tasks.length / itemsPerPage));
@@ -31,7 +32,20 @@ function App() {
     );
     setItemOffset(newOffset);
   };
-
+  const updateTaskDone=(id, newDone) =>{
+    setTasks(prev => {
+      const newTasks = [...prev];
+      newTasks[id].done = newDone;
+      return newTasks;
+        });
+       
+  }
+  const removeHandler=()=>{
+  
+    dispatch(removeTask( id )),
+    showAlert(true, 'danger', 'you deleted one value')
+  
+  }
 
   // const handleSubmit =(e) => {
   //   e.preventDefault();
@@ -51,6 +65,7 @@ function App() {
       
      <h1>Redux-Toolkit</h1>
      <p>It will be something with Toolkit</p>
+     {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
    <ToDo/>
    {/* <div>
          {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
@@ -72,7 +87,8 @@ function App() {
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
-        {...task}  content={task.content}
+        {...task}  content={task.content} 
+        // onToggle={done => updateTaskDone(id, done)} 
               // Rename={newName => renameTask(id,newName)}
               // removeItem={() => removeItem(id)}
               // onToggle={done => updateTaskDone(id, done)} 
