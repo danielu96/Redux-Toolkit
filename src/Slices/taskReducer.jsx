@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import React from 'react'
+// import React from 'react'
+const items = localStorage.getItem('tasks') !== null ? JSON.parse
+    (localStorage.getItem('tasks')) : [];
 
 const initialState ={
   content:'',
-  tasks:[],
+  tasks:items,
 }
 
 const taskReducer = createSlice ({
@@ -16,12 +18,20 @@ const taskReducer = createSlice ({
       //   // id: nanoid(),
       //   id:Math.random()* 1000,
       //   content: action.payload.task,
+      localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+        (item => item)))
       },
       // state.tasks.push(newTask);   
       //  },
+     
     removeTask:(state,action)  =>{
        state.tasks =  state.tasks.filter((task) => task.id !== action.payload);
+       localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+        (item => item)))
        } ,
+
+
+
        renameTask:(state,action)  =>{
         console.log(action)
 // state.tasks= state.tasks.map(i=> i.id=== action.payload.id ? action.payload :i)
@@ -48,10 +58,12 @@ const taskReducer = createSlice ({
         // state.tasks =  state.tasks.filter((task) => task.id === action.payload);
         // const index = state.tasks.filter(task => task.id === action.payload.id);
         // const updatedState = [...state];
-        // updatedState[index].content = action.payload.contemt;
+        // updatedState[index].content = action.payload.content;
 },
     clearTasks :(state)=> {
-    state.tasks=[]  
+    state.tasks=[]  ;
+    localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+      (item => item)))
   }   
     },
 
