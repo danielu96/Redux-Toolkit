@@ -1,15 +1,14 @@
-import { useState,useEffect} from 'react'
-import Alert from './Alert'
+import { useState,useEffect,useRef} from 'react'
 import './App.css'
 import ToDo from './ToDo'
 import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
-import { clearTasks } from './Slices/taskReducer'
+import { clearTasks,AddTask } from './Slices/taskReducer'
 
 
 function App() {
-   const  tasks  = useSelector((state) => state.task.tasks);
+    const  tasks  = useSelector((state) => state.task.tasks);
    const dispatch= useDispatch()
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
@@ -40,13 +39,8 @@ function App() {
         });
        
   }
-  const removeHandler=()=>{
-  
-    dispatch(removeTask( id )),
-    showAlert(true, 'danger', 'you deleted one value')
-  
-  }
-
+ 
+ 
   // const handleSubmit =(e) => {
   //   e.preventDefault();
   //   if(inputRef.current.value.trim()){
@@ -61,36 +55,19 @@ function App() {
 
   
   return (
-    <div className="App">
-      
-     <h1>Redux-Toolkit</h1>
-     <p>It will be something with Toolkit</p>
-     {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
-   <ToDo/>
-   {/* <div>
-         {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
-  <form onSubmit={handleSubmit}>      
-      <input type="text"
-            //  value={taskName}
-            ref={inputRef}
-            //  onChange={event => AddTask(event.target.value)}           
-            />
-             <button>add</button>
-    </form>
-
-
-    </div> */}
-
-
-
+    <div className="App">    
+     <h1>Redux-Toolkit</h1>     
+   <ToDo /> 
    <div  style={{height:'220px'}}>
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
         {...task}  content={task.content} 
+        // handleSubmit ={(id) => handleSubmit (id)}
+       
         // onToggle={done => updateTaskDone(id, done)} 
               // Rename={newName => renameTask(id,newName)}
-              // removeItem={() => removeItem(id)}
+              removeHandler={(id) => removeHandler(id)}
               // onToggle={done => updateTaskDone(id, done)} 
               />
          ))} 
