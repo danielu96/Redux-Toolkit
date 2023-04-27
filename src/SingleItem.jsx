@@ -3,13 +3,20 @@ import { removeTask,renameTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
 // import { useSelector } from "react-redux";
-const SingleItem = (task,done,onToggle) => {
+const SingleItem = (task,done,onToggle,handleSubmit) => {
   
 const dispatch= useDispatch()
 const [editMode,setEditMode] = useState(false);
+const removeHandler=()=>{
+  
+  dispatch(removeTask(task.id))
+  // showAlert(true, 'danger', 'you deleted one value')
+
+}
 
   return (
-    
+    <>
+  <div> {alert.show && <Alert {...alert} removeAlert={showAlert} task={task}/>}</div> 
     <div style={{width:'400px',display:'flex',justifyContent:"space-between"
     }}>    
 <Checkbox checked={done} onClick={() => onToggle(!done)} />
@@ -26,8 +33,12 @@ const [editMode,setEditMode] = useState(false);
         </form>
       )}   
 
-<button onClick={()=> dispatch(removeTask(task.id))}>X</button>
+<button onClick={
+  // ()=> dispatch(removeTask(task.id))
+removeHandler
+  }>X</button>
     </div>
+    </>
   )
 }
 export default SingleItem
