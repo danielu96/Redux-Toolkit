@@ -14,6 +14,8 @@ const ToDo = () => {
          setAlert({ show,  type, msg  });
        };
     const dispatch = useDispatch();
+
+
     const handleSubmit =(e) => {
       e.preventDefault();
       showAlert(true, 'danger', 'you must enter value')
@@ -28,6 +30,7 @@ const ToDo = () => {
       }
       inputRef.current.value=""
     }
+  
   // const handleSubmit=(ev) =>{
   //   ev.preventDefault();
   //   if(!taskName)
@@ -52,20 +55,18 @@ const ToDo = () => {
   //       // alert('Success you just added')    
   //          }
   return  ( 
-    <div>
-         {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
-  <form onSubmit={handleSubmit}>      
-      <input type="text"
+    <div style={{display:'grid',marginTop:'1rem',marginBottom:'1rem',height:'5rem',justifyContent:'center', rowGap :'1rem'}}>
+       
+         <div >  {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks} />|| "add new value"}</div>
+  <form  style={{ bottom:'0px'}} onSubmit={handleSubmit}>      
+      <input  type="text"
             //  value={taskName}
             ref={inputRef}
             //  onChange={event => AddTask(event.target.value)}           
             />
              <button>add</button>
     </form>
-
-
     </div>
   )
 }
-
 export default ToDo
