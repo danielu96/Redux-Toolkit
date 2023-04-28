@@ -3,7 +3,7 @@ import { removeTask,renameTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
 // import { useSelector } from "react-redux";
-const SingleItem = (task,done,onToggle,handleSubmit) => {
+const SingleItem = (task,done,handleSubmit) => {
   
 const dispatch= useDispatch()
 const [editMode,setEditMode] = useState(false);
@@ -13,13 +13,23 @@ const removeHandler=()=>{
   // showAlert(true, 'danger', 'you deleted one value')
 
 }
-
+const renameHandler=()=>{
+  dispatch(renameTask(task.id))
+}
+ const updateTaskDone=(id, newDone) =>{
+    setTasks(prev => {
+      const newTasks = [...prev];
+      newTasks[id].done = newDone;
+      return newTasks;
+        });
+       
+  }
+const onToggle= () =>{done => updateTaskDone(id, done)} 
   return (
     <>
-  <div> {alert.show && <Alert {...alert} removeAlert={showAlert} task={task}/>}</div> 
-    <div style={{width:'400px',display:'flex',justifyContent:"space-between"
-    }}>    
-<Checkbox checked={done} onClick={() => onToggle(!done)} />
+
+    <div className='singleItem' >    
+<Checkbox checked={!done} onClick={() => onToggle(done)} />
 {!editMode ? (
         <div className="" onClick={() => setEditMode(prev => !prev)}>
           <span>{task.content}</span>
@@ -28,7 +38,9 @@ const removeHandler=()=>{
        (
         <form style={{marginLeft:'1rem'}} onSubmit={ev => {ev.preventDefault();setEditMode(false);}}>
           <input type="text" value={task.content}
-                 onChange={(ev)=> dispatch(renameTask(ev.target.value)) } />
+                 onChange={renameHandler
+                  // (ev)=> dispatch(renameTask(ev.target.value))
+                   } />
                  <button>update</button>
         </form>
       )}   
