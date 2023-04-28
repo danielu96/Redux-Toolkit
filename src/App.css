@@ -98,6 +98,9 @@
 .undone{
   color: red;
 }
+.completed{
+  color: blue;
+}
 
 .alert-danger{
   color: red;
