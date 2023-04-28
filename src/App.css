@@ -4,7 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
-
+.App{
+  background-color: rgb(236, 243, 241);
+  padding: 1rem;
+  border:solid 1px #888;
+ 
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -111,4 +116,16 @@
   color: green;
   /* background-color: aqua; */
   font-weight: bold;
+}
+.singleItem{
+  width:400px;
+  display:flex;
+  justify-content: space-between;
+  background:lightGray;
+  margin:5px;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+}
+.singleItem:hover{
+  background-color: #697d7d;
 }
