@@ -1,10 +1,10 @@
-import { useState,useEffect,useRef} from 'react'
+import { useState,useEffect} from 'react'
 import './App.css'
 import ToDo from './ToDo'
 import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
-import { clearTasks,AddTask } from './Slices/taskReducer'
+import { clearTasks } from './Slices/taskReducer'
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const itemsPerPage = 4;
 
   useEffect(() => {
     
@@ -31,14 +31,14 @@ function App() {
     );
     setItemOffset(newOffset);
   };
-  const updateTaskDone=(id, newDone) =>{
-    setTasks(prev => {
-      const newTasks = [...prev];
-      newTasks[id].done = newDone;
-      return newTasks;
-        });
+  // const updateTaskDone=(id, newDone) =>{
+  //   setTasks(prev => {
+  //     const newTasks = [...prev];
+  //     newTasks[id].done = newDone;
+  //     return newTasks;
+  //       });
        
-  }
+  // }
  
  
   // const handleSubmit =(e) => {
@@ -58,7 +58,7 @@ function App() {
     <div className="App">    
      <h1>Redux-Toolkit</h1>     
    <ToDo /> 
-   <div  style={{height:'220px'}}>
+   <div  style={{height:'220px' }}>
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
@@ -67,8 +67,9 @@ function App() {
        
         // onToggle={done => updateTaskDone(id, done)} 
               // Rename={newName => renameTask(id,newName)}
-              removeHandler={(id) => removeHandler(id)}
+              // removeHandler={(id) => removeHandler(id)}
               // onToggle={done => updateTaskDone(id, done)} 
+              
               />
          ))} 
      {/* <button onClick={()=> clearItems()}>clear all</button> */}
