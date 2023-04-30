@@ -1,9 +1,34 @@
-import React ,{useState,useRef}from 'react'
-import { removeTask,renameTask } from './Slices/taskReducer'
+import React ,{useState,useRef,useEffect}from 'react'
+import { removeTask,handleChange,setEditTask, renameTask,ToggleTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
 // import { useSelector } from "react-redux";
-const SingleItem = (task,done,handleSubmit) => {
+
+
+
+
+
+
+const SingleItem = (task,done,name,id) => {
+
+  // useEffect(()=>{
+  //   dispatch(
+  //     handleChange({
+  //       name:task.name
+  //     })
+  //   )
+  // },[task.name]);
+
+// useEffect(() => {
+//         // dispatch(SortProducts(products))
+//         dispatch(setEditTask(task.name))
+//         console.log(task.name)
+//     }, [task.name
+//         // products.sort,
+//         // products.filters
+//     ])
+
+
   
 const dispatch= useDispatch()
 const [editMode,setEditMode] = useState(false);
@@ -13,9 +38,12 @@ const removeHandler=()=>{
   // showAlert(true, 'danger', 'you deleted one value')
 
 }
-const renameHandler=()=>{
-  dispatch(renameTask(task.id))
-}
+const renameHandler=(e)=>{
+  const name= e.target.name;
+  const value = e.target.value;
+  dispatch(handleChange({name,value}))
+} 
+
  const updateTaskDone=(id, newDone) =>{
     setTasks(prev => {
       const newTasks = [...prev];
@@ -28,20 +56,46 @@ const onToggle= () =>{done => updateTaskDone(id, done)}
   return (
     <>
 
-    <div className='singleItem' >    
-<Checkbox checked={!done} onClick={() => onToggle(done)} />
+    <div className='singleItem' >   
+
+     <input type='checkbox' checked={task.completed}
+  // onChange={()=>onToggle(task.id)}
+  onChange={()=>dispatch(ToggleTask(task.id))
+  }
+  ></input> 
+ {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
+ <Checkbox checked={task.completed} 
+ onClick={() => 
+  dispatch(ToggleTask(task.id))
+  // dispatch(ToggleTask(task.done))
+}
+
+  />
+ 
+     <p style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+                {task.name}
+            </p>
+  {/* <div onClick={{'wesza'}}>werty</div> */}
+ 
 {!editMode ? (
         <div className="" onClick={() => setEditMode(prev => !prev)}>
-          <span>{task.content}</span>
+          <span>{task.name}</span>
         </div>
       ):
        (
-        <form style={{marginLeft:'1rem'}} onSubmit={ev => {ev.preventDefault();setEditMode(false);}}>
-          <input type="text" value={task.content}
-                 onChange={renameHandler
-                  // (ev)=> dispatch(renameTask(ev.target.value))
-                   } />
-                 <button>update</button>
+        <form style={{marginLeft:'1rem'}} 
+        // onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
+        >
+          <input type="text" value={name}
+         onChange= 
+           {renameHandler }
+          // {()=>dispatch(setEditTask(id))}
+        
+          />
+                 <button 
+onClick={renameHandler}
+                //  onClick={()=>dispatch(setEditTask(id))}
+                 >update</button>
         </form>
       )}   
 
