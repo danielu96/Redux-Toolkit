@@ -4,7 +4,8 @@ const items = localStorage.getItem('tasks') !== null ? JSON.parse
     (localStorage.getItem('tasks')) : [];
 
 const initialState ={
-  content:'',
+  // isEditing:false,
+  
   tasks:items,
 }
 
@@ -21,9 +22,37 @@ const taskReducer = createSlice ({
       localStorage.setItem('tasks', JSON.stringify(state.tasks.map
         (item => item)))
       },
+      // ToggleTask:(state,action) =>{
+      // state.tasks.map(task =>
+      //   (task.id === action.id)
+      //     ? {...task, completed: !task.completed}
+      //     : task
+      // )           
+      //   localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+      //     (item => item)))
+      // },
+      ToggleTask(state, action) {
+        const task = state.tasks.find(task => task.id === action.payload)
+        if (task) {
+          task.completed = !task.completed
+        }
+        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+          (item => item)))
+      },
+        
       // state.tasks.push(newTask);   
       //  },
-     
+     handleChange:(state,{payload:{name,value}})=>{
+state[name]= value;
+localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+  (item => item)))
+     },
+   setEditTask:(state,{payload})=>{
+    return {...state,isEditing:true, ...payload},
+    localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+      (item => item)))
+   }  ,
+
     removeTask:(state,action)  =>{
        state.tasks =  state.tasks.filter((task) => task.id !== action.payload);
        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
@@ -68,5 +97,5 @@ const taskReducer = createSlice ({
 
   }
 )
-export const {AddTask,removeTask,renameTask,clearTasks} = taskReducer.actions;
+export const {AddTask,removeTask,renameTask,clearTasks,handleChange,setEditTask,ToggleTask} = taskReducer.actions;
 export default taskReducer.reducer
