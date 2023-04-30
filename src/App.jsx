@@ -13,7 +13,7 @@ function App() {
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     
@@ -62,7 +62,7 @@ function App() {
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
-        {...task}  content={task.content} 
+        {...task} 
         // handleSubmit ={(id) => handleSubmit (id)}
        
         // onToggle={done => updateTaskDone(id, done)} 
