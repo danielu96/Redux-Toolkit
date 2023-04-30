@@ -23,7 +23,8 @@ const ToDo = () => {
         showAlert(true, 'success', 'you added new value')
         dispatch(AddTask({
           id:Math.random()* 1000 ,
-          content:inputRef.current.value,
+          name:inputRef.current.value,
+          completed:false,
           done:false,
         }))
         console.log(inputRef.current.value);
