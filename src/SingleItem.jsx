@@ -1,5 +1,5 @@
 import React ,{useState,useRef,useEffect}from 'react'
-import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask } from './Slices/taskReducer'
+import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask,UpdateTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
 // import { useSelector } from "react-redux";
@@ -9,15 +9,15 @@ import Checkbox from "./Checkbox";
 
 
 
-const SingleItem = (task,done,name,id) => {
+const SingleItem = (task,id) => {
 
-  // useEffect(()=>{
-  //   dispatch(
-  //     handleChange({
-  //       name:task.name
-  //     })
-  //   )
-  // },[task.name]);
+  useEffect(()=>{
+    dispatch(
+      UpdateTask({
+        name:task.name
+      })
+    )
+  },[task.name]);
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
@@ -71,40 +71,38 @@ const onToggle= () =>{done => updateTaskDone(id, done)}
   // dispatch(ToggleTask(task.done))
 }
 
-  />
- 
-     
-           
-  {/* <div onClick={{'wesza'}}>werty</div> */}
- 
+  />    
+   
 {!editMode ? (
-        <div className="" onClick={() => setEditMode(prev => !prev)}>
+        <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
           {/* <span>{task.name}</span> */}
-          <p className='singleTask' style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+          <p  style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {task.name}
                 </p>
+                <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
         </div>
       ):
        (
         <form style={{marginLeft:'1rem',marginTop:'1rem'}} 
         // onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
-          <input type="text" value={name}
+          <input type="text" value={task.name}
          onChange= 
-         {()=>dispatch(renameTask(task.id))}
+        //  {renameHandler} 
+         {()=>dispatch(UpdateTask(task.id))}
           // {()=>dispatch(setEditTask(id))}
         
           />
                  <button 
 onClick=
-{()=>dispatch(renameTask(task.id))}
+{()=>dispatch(UpdateTask(task.id))}
 // {renameHandler}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
         </form>
       )}   
 
-<button onClick={
+<button style={{height:'2rem',marginTop:'1rem'}} onClick={
   // ()=> dispatch(removeTask(task.id))
 removeHandler
   }>X</button>
