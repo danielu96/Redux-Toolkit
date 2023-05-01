@@ -56,7 +56,8 @@ function App() {
   
   return (
     <div className="App">    
-     <h1>Redux-Toolkit</h1>     
+     <h1>Redux-Toolkit</h1>   
+     <div>{tasks.length} task {tasks.completed}</div>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
       { currentItems.map((task,id) => (
