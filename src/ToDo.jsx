@@ -25,7 +25,7 @@ const ToDo = () => {
           id:Math.random()* 1000 ,
           name:inputRef.current.value,
           completed:false,
-          done:false,
+         
         }))
         console.log(inputRef.current.value);
       }
