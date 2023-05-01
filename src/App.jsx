@@ -63,7 +63,7 @@ function App() {
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
-        {...task} 
+        {...task} name={task.name}
         // handleSubmit ={(id) => handleSubmit (id)}
        
         // onToggle={done => updateTaskDone(id, done)} 
