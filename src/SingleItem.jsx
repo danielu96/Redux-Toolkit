@@ -1,5 +1,5 @@
 import React ,{useState,useRef,useEffect}from 'react'
-import { removeTask,handleChange,setEditTask, renameTask,ToggleTask } from './Slices/taskReducer'
+import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
 // import { useSelector } from "react-redux";
@@ -42,6 +42,7 @@ const renameHandler=(e)=>{
   const name= e.target.name;
   const value = e.target.value;
   dispatch(handleChange({name,value}))
+  console.log(name)
 } 
 
  const updateTaskDone=(id, newDone) =>{
@@ -72,28 +73,32 @@ const onToggle= () =>{done => updateTaskDone(id, done)}
 
   />
  
-     <p style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
-                {task.name}
-            </p>
+     
+           
   {/* <div onClick={{'wesza'}}>werty</div> */}
  
 {!editMode ? (
         <div className="" onClick={() => setEditMode(prev => !prev)}>
-          <span>{task.name}</span>
+          {/* <span>{task.name}</span> */}
+          <p className='singleTask' style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+                {task.name}
+                </p>
         </div>
       ):
        (
-        <form style={{marginLeft:'1rem'}} 
+        <form style={{marginLeft:'1rem',marginTop:'1rem'}} 
         // onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
           <input type="text" value={name}
          onChange= 
-           {renameHandler }
+         {()=>dispatch(renameTask(task.id))}
           // {()=>dispatch(setEditTask(id))}
         
           />
                  <button 
-onClick={renameHandler}
+onClick=
+{()=>dispatch(renameTask(task.id))}
+// {renameHandler}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
         </form>
