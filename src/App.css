@@ -136,5 +136,8 @@
   background-color: #697d7d;
 }
 .singleTask{
+  display: flex;
+  width:5rem;
+  justify-content: space-between;
   width: 5rem;
 }
