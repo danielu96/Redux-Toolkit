@@ -39,11 +39,20 @@ const taskReducer = createSlice ({
         localStorage.setItem('tasks', JSON.stringify(state.tasks.map
           (item => item)))
       },
+      changeTask(state, action) {
+        const task = state.tasks.find(task => task.id === action.payload)
+        if (task) {
+          task[task.name] = task.name
+        }
+        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+          (item => item)))
+      },
         
       // state.tasks.push(newTask);   
       //  },
-     handleChange:(state,{payload:{name,value}})=>{
-state[name]= value;
+     handleChange:(state,action)=>{
+      const task = state.tasks.find(task => task.id === action.payload);
+state[task.name]= value;
 localStorage.setItem('tasks', JSON.stringify(state.tasks.map
   (item => item)))
      },
@@ -59,6 +68,7 @@ localStorage.setItem('tasks', JSON.stringify(state.tasks.map
         (item => item)))
        } ,
        renameTask:(state,action)  =>{
+        const task = state.tasks.find(task => task.id === action.payload);
         console.log(action)
         localStorage.setItem('tasks', JSON.stringify(state.tasks.map
           (item => item)))
@@ -97,5 +107,5 @@ localStorage.setItem('tasks', JSON.stringify(state.tasks.map
 
   }
 )
-export const {AddTask,removeTask,renameTask,clearTasks,handleChange,setEditTask,ToggleTask} = taskReducer.actions;
+export const {AddTask,removeTask,renameTask,clearTasks,handleChange,setEditTask,ToggleTask,changeTask} = taskReducer.actions;
 export default taskReducer.reducer
