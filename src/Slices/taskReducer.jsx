@@ -66,12 +66,12 @@ const taskReducer = createSlice ({
         
       // state.tasks.push(newTask);   
       //  },
-     handleChange:(state,action)=>{
-      const task = state.tasks.find(task => task.id === action.payload);
-state[task.name]= value;
-localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-  (item => item)))
-     },
+//      handleChange:(state,action)=>{
+//       const task = state.tasks.find(task => task.id === action.payload);
+// // state[task.name]= value;
+// localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+//   (item => item)))
+//      },
    setEditTask:(state,{payload})=>{
     return {...state,isEditing:true, ...payload},
     localStorage.setItem('tasks', JSON.stringify(state.tasks.map
