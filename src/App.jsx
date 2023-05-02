@@ -8,12 +8,14 @@ import { clearTasks } from './Slices/taskReducer'
 
 
 function App() {
+ 
     const  tasks  = useSelector((state) => state.task.tasks);
    const dispatch= useDispatch()
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 3;
+  const numberComplete = tasks.filter(t => t.completed).length;
 
   useEffect(() => {
     
@@ -57,7 +59,7 @@ function App() {
   return (
     <div className="App">    
      <h1>Redux-Toolkit</h1>   
-     <div>{tasks.length} task {tasks.completed}</div>  
+     <div>{numberComplete} task from {tasks.length}</div>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
       { currentItems.map((task,id) => (
