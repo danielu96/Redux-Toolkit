@@ -2,22 +2,16 @@ import React ,{useState,useRef,useEffect}from 'react'
 import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask,UpdateTask } from './Slices/taskReducer'
 import { useDispatch } from 'react-redux'
 import Checkbox from "./Checkbox";
-// import { useSelector } from "react-redux";
 
+const SingleItem = (task,id,name) => {
 
-
-
-
-
-const SingleItem = (task,id) => {
-
-  useEffect(()=>{
-    dispatch(
-      UpdateTask({
-        name:task.name
-      })
-    )
-  },[task.name]);
+  // useEffect(()=>{
+  //   dispatch(
+  //     UpdateTask({
+  //       name:task.name
+  //     })
+  //   )
+  // },[task.name]);
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
@@ -45,33 +39,26 @@ const renameHandler=(e)=>{
   console.log(name)
 } 
 
- const updateTaskDone=(id, newDone) =>{
-    setTasks(prev => {
-      const newTasks = [...prev];
-      newTasks[id].done = newDone;
-      return newTasks;
-        });
-       
-  }
-const onToggle= () =>{done => updateTaskDone(id, done)} 
+//  const updateTaskDone=(id, newCompleted) =>{
+//     setTasks(prev => {
+//       const newTasks = [...prev];
+//       newTasks[id].completed = newCompleted;
+//       return newTasks;
+//         });       
+//   }
+// const onToggle= () =>{completed => updateTaskDone(id, completed)} 
+// const onToggleTask= () =>{completed => dispatch(ToggleTask(id, completed))} 
   return (
     <>
-
-    <div className='singleItem' >   
-
+    <div className='singleItem' >  
      <input type='checkbox' checked={task.completed}
   // onChange={()=>onToggle(task.id)}
-  onChange={()=>dispatch(ToggleTask(task.id))
-  }
+  onChange=
+  { ()=>dispatch(ToggleTask(task.id))   }
   ></input> 
  {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
  <Checkbox checked={task.completed} 
- onClick={() => 
-  dispatch(ToggleTask(task.id))
-  // dispatch(ToggleTask(task.done))
-}
-
-  />    
+ onClick={  () =>   dispatch(ToggleTask(task.id))  }  />    
    
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
@@ -84,28 +71,24 @@ const onToggle= () =>{done => updateTaskDone(id, done)}
       ):
        (
         <form style={{marginLeft:'1rem',marginTop:'1rem'}} 
-        // onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
+        onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
           <input type="text" value={task.name}
          onChange= 
         //  {renameHandler} 
-         {()=>dispatch(UpdateTask(task.id))}
+         {()=>dispatch(UpdateTask(task.name))}
           // {()=>dispatch(setEditTask(id))}
-        
-          />
+                  />
                  <button 
 onClick=
-{()=>dispatch(UpdateTask(task.id))}
-// {renameHandler}
+// {()=>dispatch(UpdateTask(name))}
+{renameHandler}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
         </form>
       )}   
 
-<button style={{height:'2rem',marginTop:'1rem'}} onClick={
-  // ()=> dispatch(removeTask(task.id))
-removeHandler
-  }>X</button>
+<button style={{height:'2rem',marginTop:'1rem'}} onClick={removeHandler}>X</button>
     </div>
     </>
   )
