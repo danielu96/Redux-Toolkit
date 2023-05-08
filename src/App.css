@@ -134,6 +134,7 @@
 }
 .singleItem:hover{
   background-color: #697d7d;
+  /* transition: filter 9ms; */
 }
 .singleTask{
   display: flex;
