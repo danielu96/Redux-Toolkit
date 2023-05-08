@@ -65,7 +65,8 @@ function App() {
       { currentItems.map((task,id) => (
         <SingleItem
          key={id} 
-        {...task} name={task.name}
+        {...task} 
+       
         // handleSubmit ={(id) => handleSubmit (id)}
        
         // onToggle={done => updateTaskDone(id, done)} 
@@ -75,12 +76,11 @@ function App() {
               
               />
          ))} 
-     {/* <button onClick={()=> clearItems()}>clear all</button> */}
+   
 </div>
 <button onClick={()=>
   dispatch(clearTasks())}>clear all</button>
-{/* <button className='btn-clear' onClick={() =>
-                            dispatch(openModal())}>Clear Cart</button> */}
+
 <div style={{top:'1rem'}}>
       <ReactPaginate
         breakLabel="..."
