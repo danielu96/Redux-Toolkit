@@ -1,13 +1,15 @@
 import React, { useRef } from 'react'
 import { useState } from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { AddTask } from './Slices/taskReducer';
 import Alert from './Alert';
 
 
 const ToDo = () => {
   const inputRef = useRef()
-  const {tasks,setTasks} =useState('')
+ 
+  const[title,setTitle]=useState('')
+    const {task}=useSelector((state)=> state.task.tasks)
     // const {taskName,setTaskName}=useState('')
     const [alert, setAlert] = useState({ show: false, msg: '', type: ''  });
    const showAlert = (show = false, type = '', msg = '' ) => {
@@ -18,18 +20,36 @@ const ToDo = () => {
 
     const handleSubmit =(e) => {
       e.preventDefault();
+      if (!inputRef.current.value.trim())
+      //  (!title)
       showAlert(true, 'danger', 'you must enter value')
-      if(inputRef.current.value.trim()){
+      else
+      // (e.target.value)
+      
+
+      {
         showAlert(true, 'success', 'you added new value')
-        dispatch(AddTask({
-          id:Math.random()* 1000 ,
-          name:inputRef.current.value,
+        dispatch(AddTask(
+          {
+      //  title,
+          //  title,
+          id:Date.now(),
+          // id,
+          // // // id:Math.random()* 1000 ,
+           title:inputRef.current.value,
+           time:new Date().toLocaleString(),
+          // title,
           completed:false,
          
-        }))
-        console.log(inputRef.current.value);
+        }
+        ))
+        // console.log(title);
       }
       inputRef.current.value=""
+      // setTitle=""
+      // e.target.value=""
+      // value=""
+    
     }
   
   // const handleSubmit=(ev) =>{
@@ -58,10 +78,12 @@ const ToDo = () => {
   return  ( 
     <div style={{display:'grid',marginTop:'1rem',marginBottom:'1rem',height:'5rem',justifyContent:'center', rowGap :'1rem'}}>
        
-         <div >  {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks} />|| "add new value"}</div>
+         <div >  {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={task} />|| "add new value"}</div>
   <form  style={{ bottom:'0px'}} onSubmit={handleSubmit}>      
       <input  type="text"
-            //  value={taskName}
+      id='title'
+            //  value={title}
+             onChange={(e) => setTitle(e.target.value)}
             ref={inputRef}
             //  onChange={event => AddTask(event.target.value)}           
             />
