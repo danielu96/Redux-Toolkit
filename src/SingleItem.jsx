@@ -1,17 +1,35 @@
 import React ,{useState,useRef,useEffect}from 'react'
-import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask,UpdateTask } from './Slices/taskReducer'
-import { useDispatch } from 'react-redux'
+import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask,UpdateTask,update } from './Slices/taskReducer'
+import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from "./Checkbox";
 
-const SingleItem = (task,id,name) => {
+const SingleItem = (task) => {
+  const[title,setTitle] = useState('');
+  // const {state,setState}=useState(initialState)
+  // const {name}=useSelector((state)=> state.task.tasks)
+  const inputRef = useRef()
+  // const handleEdit =(e) => {
+  //   e.preventDefault();
+  //   // showAlert(true, 'danger', 'you must enter value')
+  //   if(inputRef.current.value.trim()){
+  //     // showAlert(true, 'success', 'you added new value')
+  //     dispatch(AddTask({
 
-  // useEffect(()=>{
-  //   dispatch(
-  //     UpdateTask({
-  //       name:task.name
-  //     })
-  //   )
-  // },[task.name]);
+  //       id:Math.random()* 1000 ,
+  //       name:inputRef.current.value,
+  //       completed:false,
+       
+  //     }))
+  //     console.log(inputRef.current.value);
+  //   }
+  //   inputRef.current.value=""
+  // }
+
+  useEffect(()=>{ 
+    if(task) {  
+      setTitle(task.title)
+    }
+  },[task]);
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
@@ -26,18 +44,29 @@ const SingleItem = (task,id,name) => {
   
 const dispatch= useDispatch()
 const [editMode,setEditMode] = useState(false);
-const removeHandler=()=>{
-  
+const removeHandler=()=>{  
   dispatch(removeTask(task.id))
   // showAlert(true, 'danger', 'you deleted one value')
-
 }
-const renameHandler=(e)=>{
-  const name= e.target.name;
-  const value = e.target.value;
-  dispatch(handleChange({name,value}))
-  console.log(name)
+// handleUpdate = (e) =>{
+//   e.preventDefault();
+//   dispatch(update({name,value}))
+// };
+const renameHandler=()=>{
+  //  const name = e.target.name;
+  // const value = e.target.value;
+  dispatch(update({
+    ...task,
+    // name:task.name,
+    title:title,
+    // value:task.value
+  }))
+ 
 } 
+// handleInputChange = (e)=>{
+// const {name,value}=e.target;
+// setState({...state,[name]:value})
+// }
 
 //  const updateTaskDone=(id, newCompleted) =>{
 //     setTasks(prev => {
@@ -56,6 +85,7 @@ const renameHandler=(e)=>{
   onChange=
   { ()=>dispatch(ToggleTask(task.id))   }
   ></input> 
+   <p>{task.time}</p>
  {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
  <Checkbox checked={task.completed} 
  onClick={  () =>   dispatch(ToggleTask(task.id))  }  />    
@@ -64,8 +94,10 @@ const renameHandler=(e)=>{
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
           {/* <span>{task.name}</span> */}
           <p  style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
-                {task.name}
+                {title} 
+               
                 </p>
+               
                 <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
         </div>
       ):
@@ -73,16 +105,26 @@ const renameHandler=(e)=>{
         <form style={{marginLeft:'1rem',marginTop:'1rem'}} 
         onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
-          <input type="text" value={task.name}
+          <input type="text" id='title' value={title}
          onChange= 
+        //  {()=>dispatch(changeTask(task.name))}
+        // {(e)=>(setName(e.target.value))}
+        // {handleUpdate}
+      
+          {(e)=>setTitle(e.target.value)}
+        //  {()=>dispatch(changeTask(task.name))}
+        //  {()=>handleChange(task.name)}
         //  {renameHandler} 
-         {()=>dispatch(UpdateTask(task.name))}
+        //  {()=>dispatch(changeTask(task.id))}
+        // {handleEdit}
           // {()=>dispatch(setEditTask(id))}
                   />
                  <button 
 onClick=
-// {()=>dispatch(UpdateTask(name))}
-{renameHandler}
+// {()=>dispatch(changeTask(task.name))}
+// {handleEdit}
+{renameHandler(task.title)}
+// {handleUpdate}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
         </form>
