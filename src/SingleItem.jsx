@@ -13,7 +13,7 @@ const {completed,id,time}=task
     if(task) {  
       setTitle(task.title)
     }
-  },[task]);
+  },[task.title]);
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
