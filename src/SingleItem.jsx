@@ -5,25 +5,9 @@ import Checkbox from "./Checkbox";
 
 const SingleItem = (task) => {
   const[title,setTitle] = useState('');
-  // const {state,setState}=useState(initialState)
-  // const {name}=useSelector((state)=> state.task.tasks)
-  const inputRef = useRef()
-  // const handleEdit =(e) => {
-  //   e.preventDefault();
-  //   // showAlert(true, 'danger', 'you must enter value')
-  //   if(inputRef.current.value.trim()){
-  //     // showAlert(true, 'success', 'you added new value')
-  //     dispatch(AddTask({
+const {completed,id,time}=task
 
-  //       id:Math.random()* 1000 ,
-  //       name:inputRef.current.value,
-  //       completed:false,
-       
-  //     }))
-  //     console.log(inputRef.current.value);
-  //   }
-  //   inputRef.current.value=""
-  // }
+  
 
   useEffect(()=>{ 
     if(task) {  
@@ -45,7 +29,7 @@ const SingleItem = (task) => {
 const dispatch= useDispatch()
 const [editMode,setEditMode] = useState(false);
 const removeHandler=()=>{  
-  dispatch(removeTask(task.id))
+  dispatch(removeTask(id))
   // showAlert(true, 'danger', 'you deleted one value')
 }
 // handleUpdate = (e) =>{
@@ -80,20 +64,20 @@ const renameHandler=()=>{
   return (
     <>
     <div className='singleItem' >  
-     <input type='checkbox' checked={task.completed}
+     <input type='checkbox' checked={completed}
   // onChange={()=>onToggle(task.id)}
   onChange=
-  { ()=>dispatch(ToggleTask(task.id))   }
+  { ()=>dispatch(ToggleTask(id))   }
   ></input> 
-   <p>{task.time}</p>
+   <p>{time}</p>
  {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
- <Checkbox checked={task.completed} 
- onClick={  () =>   dispatch(ToggleTask(task.id))  }  />    
+ <Checkbox checked={completed} 
+ onClick={  () =>   dispatch(ToggleTask(id))  }  />    
    
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
           {/* <span>{task.name}</span> */}
-          <p  style={task.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+          <p  style={completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title} 
                
                 </p>
@@ -123,7 +107,7 @@ const renameHandler=()=>{
 onClick=
 // {()=>dispatch(changeTask(task.name))}
 // {handleEdit}
-{renameHandler(task.title)}
+{renameHandler(title)}
 // {handleUpdate}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
