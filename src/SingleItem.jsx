@@ -4,16 +4,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from "./Checkbox";
 
 const SingleItem = (task) => {
-  const[title,setTitle] = useState('');
-const {completed,id,time}=task
+  // const[title,setTitle] = useState('');
+const {completed,id,time,title}=task
 
-  
+  //   useEffect(()=>{ 
+  //   if(task) {  
+  //     dispatch(update(title))
+  //   }
+  // },[task]);
 
-  useEffect(()=>{ 
-    if(task) {  
-      setTitle(task.title)
-    }
-  },[task.title]);
+  // useEffect(()=>{ 
+  //   if(task) {  
+  //     update(task.title)
+  //   }
+  // },[task.title]);
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
@@ -36,13 +40,14 @@ const removeHandler=()=>{
 //   e.preventDefault();
 //   dispatch(update({name,value}))
 // };
-const renameHandler=()=>{
+const renameHandler=(e)=>{
   //  const name = e.target.name;
-  // const value = e.target.value;
+  const title = e.target.value;
   dispatch(update({
     ...task,
     // name:task.name,
     title:title,
+    // time:time,
     // value:task.value
   }))
  
@@ -90,13 +95,16 @@ const renameHandler=()=>{
         onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
           <input type="text" id='title' value={title}
-         onChange= 
+         onChange=  
+         {renameHandler }
+          //  {(e)=>dispatch(update(e))}
+
         //  {()=>dispatch(changeTask(task.name))}
         // {(e)=>(setName(e.target.value))}
         // {handleUpdate}
       
-          {(e)=>setTitle(e.target.value)}
-        //  {()=>dispatch(changeTask(task.name))}
+          // {(e)=>setTitle(e.target.value)}
+      
         //  {()=>handleChange(task.name)}
         //  {renameHandler} 
         //  {()=>dispatch(changeTask(task.id))}
@@ -107,7 +115,7 @@ const renameHandler=()=>{
 onClick=
 // {()=>dispatch(changeTask(task.name))}
 // {handleEdit}
-{renameHandler(title)}
+{renameHandler}
 // {handleUpdate}
                 //  onClick={()=>dispatch(setEditTask(id))}
                  >update</button>
