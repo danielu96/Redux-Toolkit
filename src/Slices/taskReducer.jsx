@@ -72,22 +72,40 @@ const taskReducer = createSlice ({
 //     (item => item)))
 
 // },
-update: (state, action) => {
-const tasks =  localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-        (item => item)))
-  // const tasks = window.localStorage.getItem('tasks');
+update:(state,action)=>{  
+  const tasks  =   window.localStorage.getItem('tasks')  ;
+   
   if (tasks) {
-    const tasksListArr = JSON.parse(tasks);
-    tasksListArr.forEach((task) => {
-      if (task.id === action.payload.id) {
-        // task.status = action.payload.status;
-        task.title = action.payload.title;
-      }
-    });
-    // window.localStorage.setItem('todoList', JSON.stringify(tasksListArr));
-    state.tasks = [...tasksListArr];
-  }
+         const tasksListArr = JSON.parse(tasks);  
+          
+        tasksListArr.forEach((task) => {
+          if (task.id === action.payload.id) {       
+            task.title = action.payload.title;
+          }    });  
+              
+      // console.log(action.payload)
+      window.localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+        (item => item)))
+          // window.localStorage.setItem('tasks', JSON.stringify(tasksListArr));
+          state.tasks= [...tasksListArr];     
+        }      
 },
+// update: (state, action) => {
+// const tasks =  localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+//         (item => item)))
+//   // const tasks = window.localStorage.getItem('tasks');
+//   if (tasks) {
+//      const tasksListArr = JSON.parse(tasks);   
+//     tasksListArr.forEach((task) => {
+//       if (task.id === action.payload.id) {       
+//         task.title = action.payload.title;
+//       }    });       
+// // state.tasks = [...tasksListArr];
+//     // localStorage.setItem('tasks', JSON.stringify(tasksListArr));
+//     localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+//       (item => item)))
+//   }
+// }, 
 
       changeTask(state, action) {
         const task= action.payload
