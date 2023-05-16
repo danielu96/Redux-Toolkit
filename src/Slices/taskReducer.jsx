@@ -62,6 +62,15 @@ const taskReducer = createSlice ({
         localStorage.setItem('tasks', JSON.stringify(state.tasks.map
           (item => item)))
       },
+      // update(state, action) {
+      //   const task = state.tasks.find(task => task.id === action.payload.id)
+      //   if (task) {
+      //     task.title = action.payload.title
+      //   }
+      //   localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+      //     (item => item)))
+      // },
+     
 // update (state,action){
 //   const task = state.tasks.find(task => task.id === action.payload.id);
 //   if(task === !task){
@@ -73,16 +82,13 @@ const taskReducer = createSlice ({
 
 // },
 update:(state,action)=>{  
-  const tasks  =   window.localStorage.getItem('tasks')  ;
-   
+  const tasks  =   window.localStorage.getItem('tasks')  ;   
   if (tasks) {
-         const tasksListArr = JSON.parse(tasks);  
-          
+         const tasksListArr = JSON.parse(tasks);            
         tasksListArr.forEach((task) => {
           if (task.id === action.payload.id) {       
             task.title = action.payload.title;
-          }    });  
-              
+          }    });                
       // console.log(action.payload)
       window.localStorage.setItem('tasks', JSON.stringify(state.tasks.map
         (item => item)))

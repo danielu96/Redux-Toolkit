@@ -13,11 +13,7 @@ const {completed,id,time,title}=task
   //   }
   // },[task]);
 
-  // useEffect(()=>{ 
-  //   if(task) {  
-  //     update(task.title)
-  //   }
-  // },[task.title]);
+
 
 // useEffect(() => {
 //         // dispatch(SortProducts(products))
@@ -40,13 +36,15 @@ const removeHandler=()=>{
 //   e.preventDefault();
 //   dispatch(update({name,value}))
 // };
+
 const renameHandler=(e)=>{
   //  const name = e.target.name;
   const title = e.target.value;
   dispatch(update({
     ...task,
     // name:task.name,
-    title:title,
+    title,
+    // title:(`${title}`),
     // time:time,
     // value:task.value
   }))
@@ -83,10 +81,8 @@ const renameHandler=(e)=>{
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
           {/* <span>{task.name}</span> */}
           <p  style={completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
-                {title} 
-               
-                </p>
-               
+                {title}                
+                </p>               
                 <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
         </div>
       ):
@@ -96,31 +92,15 @@ const renameHandler=(e)=>{
         >
           <input type="text" id='title' value={title}
          onChange=  
-         {renameHandler }
-          //  {(e)=>dispatch(update(e))}
-
-        //  {()=>dispatch(changeTask(task.name))}
-        // {(e)=>(setName(e.target.value))}
-        // {handleUpdate}
-      
-          // {(e)=>setTitle(e.target.value)}
-      
-        //  {()=>handleChange(task.name)}
-        //  {renameHandler} 
-        //  {()=>dispatch(changeTask(task.id))}
-        // {handleEdit}
-          // {()=>dispatch(setEditTask(id))}
-                  />
-                 <button 
-onClick=
-// {()=>dispatch(changeTask(task.name))}
-// {handleEdit}
-{renameHandler}
-// {handleUpdate}
-                //  onClick={()=>dispatch(setEditTask(id))}
-                 >update</button>
-        </form>
-      )}   
+         {renameHandler}
+        //  { (e)=>dispatch(update(e.target.value))}
+          //  {(e)=>dispatch(update(e.target.value))}         
+                // {(e)=>setTitle(e.target.value)}    
+                       />  
+                       <button  onClick= { ()=>dispatch(update(title))} >update</button>         
+        </form> )}
+       {/* <button onClick={renameHandler}>update</button> */}
+       
 
 <button style={{height:'2rem',marginTop:'1rem'}} onClick={removeHandler}>X</button>
     </div>
