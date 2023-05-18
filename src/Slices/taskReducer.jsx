@@ -7,6 +7,9 @@ const initialState ={
   // isEditing:false,
   
   tasks:items,
+  // filter:{
+  //   status:'all'
+  // },
   
 }
 
@@ -116,16 +119,16 @@ update:(state,action)=>{
       changeTask(state, action) {
         const task= action.payload
         // const name= action.payload
-         state.tasks.find(task => task.id === action.payload)
+         state.tasks.find(task => task.id === action.payload.id)
       //  state.name = action.payload.name ;
-       state.value = action.payload.value ;
+       state.title = action.payload.title ;
 
         //  state.tasks.map(task => task.id === action.payload.id ? action.payload : task)
         // const name= e.target.name;
     
        
         if (task) {
-          state[task.name] = task.name
+          state[task.title] = task.title
         }
         // if (value) {
         //   state[value] = value
@@ -145,8 +148,9 @@ update:(state,action)=>{
 // localStorage.setItem('tasks', JSON.stringify(state.tasks.map
 //   (item => item)))
 //      },
-   setEditTask:(state,{payload})=>{
-    return {...state,isEditing:true, ...payload},
+   setEditTask:(state,{payload:{title}})=>{
+    // return {...state,setEditMode:false, ...payload},
+    state[title]=title;
     localStorage.setItem('tasks', JSON.stringify(state.tasks.map
       (item => item)))
    }  ,
@@ -191,6 +195,11 @@ update:(state,action)=>{
         // const updatedState = [...state];
         // updatedState[index].content = action.payload.content;
 },
+setFilter:(state,action) =>{
+  state.filter = action.payload;
+  localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+    (item => item)))
+},
     clearTasks :(state)=> {
     state.tasks=[]  ;
     localStorage.setItem('tasks', JSON.stringify(state.tasks.map
@@ -201,5 +210,5 @@ update:(state,action)=>{
   }
 )
 export const {AddTask,removeTask,renameTask,clearTasks,
-  handleChange,setEditTask,ToggleTask,changeTask,UpdateTask,update} = taskReducer.actions;
+  handleChange,setEditTask,ToggleTask,changeTask,UpdateTask,update,setFilter} = taskReducer.actions;
 export default taskReducer.reducer
