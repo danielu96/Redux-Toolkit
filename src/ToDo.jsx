@@ -40,6 +40,7 @@ const ToDo = () => {
            time:new Date().toLocaleString(),
           // title,
           completed:false,
+          status:'undone',
          
         }
         ))
