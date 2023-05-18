@@ -5,6 +5,7 @@ import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
 import { clearTasks } from './Slices/taskReducer'
+import Filters from './Filters'
 
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
 </div>
 <button onClick={()=>
   dispatch(clearTasks())}>clear all</button>
+  <Filters/>
 
 <div style={{top:'1rem'}}>
       <ReactPaginate
