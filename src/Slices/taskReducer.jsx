@@ -7,9 +7,9 @@ const initialState ={
   // isEditing:false,
   
   tasks:items,
-  // filter:{
-  //   status:'all'
-  // },
+  filter:{
+    status:'all'
+  },
   
 }
 
@@ -31,23 +31,23 @@ const taskReducer = createSlice ({
       localStorage.setItem('tasks', JSON.stringify(state.tasks.map
         (item => item)))
       },
-      UpdateTask:(state,action)=>{
-        state.name=action.payload.name,
-  state.value=action.payload.value
-        let data = action.payload;
-        const UpdateA=[];
-        state.tasks.map((task)=>{
-          if(task.id===data.id){
-            task.id= data.id;
-            task.name=data.name;
-            task.completed=data.completed;
-          }
-          UpdateA.push(task)
-        })
-        UpdateA,
-        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-          (item => item)))
-      },
+  //     UpdateTask:(state,action)=>{
+  //       state.name=action.payload.name,
+  // state.value=action.payload.value
+  //       let data = action.payload;
+  //       const UpdateA=[];
+  //       state.tasks.map((task)=>{
+  //         if(task.id===data.id){
+  //           task.id= data.id;
+  //           task.name=data.name;
+  //           task.completed=data.completed;
+  //         }
+  //         UpdateA.push(task)
+  //       })
+  //       UpdateA,
+  //       localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+  //         (item => item)))
+  //     },
       // ToggleTask:(state,action) =>{
       // state.tasks.map(task =>
       //   (task.id === action.id)
@@ -65,14 +65,30 @@ const taskReducer = createSlice ({
         localStorage.setItem('tasks', JSON.stringify(state.tasks.map
           (item => item)))
       },
-      // update(state, action) {
-      //   const task = state.tasks.find(task => task.id === action.payload.id)
-      //   if (task) {
-      //     task.title = action.payload.title
-      //   }
+      Toggler(state, action) {
+        const task = state.tasks.find(task => task.id === action.payload)
+        if (task) {
+          task.status.undone = task.status.done
+        }
+        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+          (item => item)))
+      },
+      // UpdateTask(state, action) {
+      //   state.tasks = state.tasks((task) =>
+      //  task.id === action.payload.id ? action.payload : task)
+       
       //   localStorage.setItem('tasks', JSON.stringify(state.tasks.map
       //     (item => item)))
       // },
+      UpdateTask(state,action) {
+        state.tasks.map((task)=>{
+          if(task.id === action.payload.id) {
+            task.title= action.payload.title
+          }
+        })
+        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+              (item => item)))
+      },
      
 // update (state,action){
 //   const task = state.tasks.find(task => task.id === action.payload.id);
@@ -210,5 +226,5 @@ setFilter:(state,action) =>{
   }
 )
 export const {AddTask,removeTask,renameTask,clearTasks,
-  handleChange,setEditTask,ToggleTask,changeTask,UpdateTask,update,setFilter} = taskReducer.actions;
+  handleChange,setEditTask,ToggleTask,changeTask,UpdateTask,update,setFilter,Toggler} = taskReducer.actions;
 export default taskReducer.reducer
