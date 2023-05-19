@@ -1,11 +1,11 @@
-import React ,{useState,useRef,useEffect}from 'react'
-import { removeTask,handleChange,setEditTask, renameTask,ToggleTask,changeTask,UpdateTask,update } from './Slices/taskReducer'
+import React ,{useState,useEffect}from 'react'
+import { removeTask,setEditTask,ToggleTask,update,changeTask,Toggler, setFilter,UpdateTask } from './Slices/taskReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from "./Checkbox";
 
 const SingleItem = (task) => {
   // const[title,setTitle] = useState('');
-const {completed,id,time,title}=task
+const {completed,id,time,title,status}=task
 
   //   useEffect(()=>{ 
   //   if(task) {  
@@ -26,7 +26,8 @@ const {completed,id,time,title}=task
 
 
   
-const dispatch= useDispatch()
+const dispatch= useDispatch();
+const [ newTitle,setNewTitle]=useState();
 const [editMode,setEditMode] = useState(false);
 const removeHandler=()=>{  
   dispatch(removeTask(id))
@@ -48,8 +49,13 @@ const renameHandler=(e)=>{
     // time:time,
     // value:task.value
   }))
- 
+  //    useEffect(()=>{ 
+  //   if(task) {  
+  //     dispatch(update(title))
+  //   }
+  // },[task]);
 } 
+
 // handleInputChange = (e)=>{
 // const {name,value}=e.target;
 // setState({...state,[name]:value})
@@ -73,13 +79,17 @@ const renameHandler=(e)=>{
   { ()=>dispatch(ToggleTask(id))   }
   ></input> 
    <p>{time}</p>
+   <p 
+  //  onClick={  () =>   dispatch(setFilter('done'))  } 
+  onClick={  () =>   dispatch(Toggler('done'))  } 
+   >{status}</p>
  {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
  <Checkbox checked={completed} 
  onClick={  () =>   dispatch(ToggleTask(id))  }  />    
    
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>
-          {/* <span>{task.name}</span> */}
+         
           <p  style={completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
@@ -90,14 +100,16 @@ const renameHandler=(e)=>{
         <form style={{marginLeft:'1rem',marginTop:'1rem'}} 
         onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
-          <input type="text" id='title' value={title}
-         onChange=  
-         {renameHandler}
+          <input type="text" id='title' 
+          // value={title}
+         onChange= 
+          // {renameHandler}
         //  { (e)=>dispatch(update(e.target.value))}
           //  {(e)=>dispatch(update(e.target.value))}         
-                // {(e)=>setTitle(e.target.value)}    
+                {(e)=>setNewTitle(e.target.value)}    
                        />  
-                       <button  onClick= { ()=>dispatch(update(title))} >update</button>         
+                       {/* <button  onClick= { ()=>dispatch(update(task.title))} >update</button>      */}
+                       <button  onClick= { ()=>dispatch(UpdateTask({id:task.id,title:newTitle}))} >update</button>     
         </form> )}
        {/* <button onClick={renameHandler}>update</button> */}
        
