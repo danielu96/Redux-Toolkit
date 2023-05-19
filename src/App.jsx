@@ -9,8 +9,8 @@ import Filters from './Filters'
 
 
 function App() {
- 
-    const  tasks  = useSelector((state) => state.task.tasks);
+  const  filter = useSelector((state) => state.task.filter);
+    const  tasks = useSelector((state) => state.task.tasks);
    const dispatch= useDispatch()
    const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
@@ -63,10 +63,21 @@ function App() {
      <h3>{numberComplete} completed from {tasks.length}</h3>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
-      { currentItems.map((task,id) => (
+       { 
+           currentItems.filter((task)=>{
+            if (filter === 'all'){
+              return task;          
+            }
+            else {
+              return task.status === filter;
+            }
+          })              
+       .map((task,id) => (
         <SingleItem
          key={id} 
         {...task} 
+    
+      
        
         // handleSubmit ={(id) => handleSubmit (id)}
        
