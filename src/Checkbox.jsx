@@ -1,7 +1,7 @@
 export default function Checkbox({checked = false, onClick}) {
     return (
       <div  onClick={onClick}>
-        {!checked ? (
+        {!checked ?  (
           <div className="undone">
             undone           
           </div>
