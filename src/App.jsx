@@ -17,6 +17,7 @@ function App() {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 3;
   const numberComplete = tasks.filter(t => t.completed).length;
+  const numberStatus = tasks.filter(t => t.status==='done').length;
 
   useEffect(() => {
     
@@ -60,17 +61,18 @@ function App() {
   return (
     <div className="App">    
      <h1>Redux-Toolkit</h1>   
-     <h3>{numberComplete} completed from {tasks.length}</h3>  
+     <h3>{numberComplete} completed from {tasks.length} done= {numberStatus}</h3>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
        { 
-           currentItems.filter((task)=>{
-            if (filter === 'all'){
-              return task;          
-            }
-            else {
+           currentItems.filter((task)=>{                      
+                          if (filter === 'All'  ) {
+                            return task;          
+                          }
+            else  {
               return task.status === filter;
             }
+        
           })              
        .map((task,id) => (
         <SingleItem
