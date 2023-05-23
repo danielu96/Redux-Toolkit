@@ -16,25 +16,17 @@ const ToDo = () => {
          setAlert({ show,  type, msg  });
        };
     const dispatch = useDispatch();
-
-
     const handleSubmit =(e) => {
       e.preventDefault();
       if (!inputRef.current.value.trim())
       //  (!title)
       showAlert(true, 'danger', 'you must enter value')
-      else
-      // (e.target.value)
-      
-
-      {
+      else   
+            {
         showAlert(true, 'success', 'you added new value')
         dispatch(AddTask(
-          {
-      //  title,
-          //  title,
-          id:Date.now(),
-          // id,
+          {      
+          id:Date.now(),        
           // // // id:Math.random()* 1000 ,
            title:inputRef.current.value,
            time:new Date().toLocaleString(),
@@ -43,8 +35,7 @@ const ToDo = () => {
           status:'undone',
          
         }
-        ))
-        // console.log(title);
+        ))       
       }
       inputRef.current.value=""
       // setTitle=""
