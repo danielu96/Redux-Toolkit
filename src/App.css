@@ -5,7 +5,7 @@
   text-align: center;
 }
 .App{
-  width: 500px;
+  width: 600px;
   background-color: rgb(236, 243, 241);
   padding: 1rem;
   border:solid 1px #888;
@@ -125,7 +125,7 @@
   font-weight: bold;
 }
 .singleItem{
-  width:480px;
+  width:580px;
   display:flex;
   justify-content: space-between;
   background:lightGray;
