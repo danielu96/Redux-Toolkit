@@ -3,25 +3,18 @@ import { removeTask,UpdateStatus,ToggleTask,update,changeTask,Toggler, setFilter
 import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from "./Checkbox";
 
-// const initialState={
-//   status:""
-// }
  
-
-const SingleItem = (task) => {
-  // const [state, setState] = useState(initialState);
+const SingleItem = (task) => { 
  
-  // const[title,setTitle] = useState('');
 const {completed,id,time,title,status}=task
 
 
-
-    // useEffect(()=>{ 
-    // if(task) {  
-    //    completed:false = task.status==='undone',
-    //    completed:true = task.status==='done',
-    //   })
-    // }
+  //   useEffect((completed)=>{ 
+  //   if(task) {  
+  //      completed:false = task.status==='undone',
+  //      completed:true = task.status==='done',
+  //     })
+  //   }
     
     
   // },[task,completed]);  
@@ -51,7 +44,7 @@ const handleDropdownChange = (e) => {
   }
 
   ))
-  dispatch(ToggleTask(id))
+  dispatch(ToggleTask(task.id))
 };
 
 
@@ -62,7 +55,15 @@ const renameHandler=(e)=>{
     title, 
     status  
   }))
+useEffect(()=>{
+  if(type==="update" && task){
+    setNewTitle(task.title)
+  }
+  else{
+    setNewTitle('')
+  }
 
+},[type,task])
 //      useEffect(()=>{ 
 //     if(editMode && task) {  
 //       title(task.title);
@@ -91,21 +92,23 @@ const renameHandler=(e)=>{
     <>
     
     <div className='singleItem' >  
-     <input type='checkbox' checked={completed}  
+     {/* <input type='checkbox' 
+    //  status={status="undone"}
+     checked={completed}  
   onChange=
   { 
     // ()=>dispatch(ToggleTask(id)) 
     // ||
      handleDropdownChange  }
-  ></input> 
- 
-   <p>{time}</p>
-   {/* <p 
-  //  onClick={  () =>   dispatch(setFilter('done'))  } 
-  onClick={  () =>   dispatch(Toggler({id:task.id,status:task.status}))  } 
-   >{status}</p> */}
+  ></input>  */}
+  <p  style={ task.status==='done' ?{color:'blue',border:'solid 1px blue',width:'6rem'}:{color:'red',border:'solid 1px red',width:'6rem'}}>
+                {task.status==='select status'? 'not selected' : status}                
+                </p>   
+
+   <p>{time}</p>  
     <select style={{margin:'1rem'}} 
       name="status"
+      type="update"
       onChange={handleDropdownChange}
     // onChange=
     // {  () =>  
@@ -116,23 +119,27 @@ const renameHandler=(e)=>{
     //  } 
     // // {()=> setStatus({id:task.id,status:task.status})}
     >    <option>select status</option>
-            <option 
-            
-            value="undone" select={status === "undone" ? status : ""}
+            <option             
+            value="undone" select={status === "undone" ? status : "" && {completed:false}}
             >
             undone
         </option>
-        <option  
-        
-          value="done" select={status === "done" ? status : ""}
+        <option          
+          value="done" select={status === "done" ? status : "" &&  {completed:true}}
         >
-          done
-           {/* undone */}
+          done          
             </option>
       </select>
  {/* <Checkbox checked={!done} onClick={() => onToggle(task.id)} /> */}
- <Checkbox checked={completed} 
- onClick={  () =>   dispatch(ToggleTask(id))  }  />      
+ {/* <Checkbox checked={completed} 
+//  onClick={  () =>   dispatch(ToggleTask(id))  } 
+  />       */}
+  
+   
+ {/* <p className='done'{}
+  // { task.status==="done" ? {className:'done'}:{className:'undone'}}
+  >
+  </p>  */}
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>         
           <p  style={ completed===true || task.status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
@@ -146,7 +153,7 @@ const renameHandler=(e)=>{
         onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
           <input type="text" id='title' 
-          // value={title}
+          value={newTitle}
          onChange= 
           // {renameHandler}
         //  { (e)=>dispatch(update(e.target.value))}                  
