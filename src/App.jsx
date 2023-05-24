@@ -4,7 +4,7 @@ import ToDo from './ToDo'
 import SingleItem from './SingleItem'
 import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
-import { clearTasks } from './Slices/taskReducer'
+import { clearTasks, setFilter } from './Slices/taskReducer'
 import Filters from './Filters'
 
 
@@ -58,18 +58,21 @@ function App() {
   //   }
   //   inputRef.current.value=""
   // }
-
+useEffect(()=>{
+dispatch(setFilter('All'));
+},[])
   
   return (
     <div className="App">    
      <h1>Redux-Toolkit</h1>   
      <h3>
       {/* {numberComplete}  */}
-     all task {tasks.length} / notselected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
+     all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
        { 
-           currentItems.filter((task)=>{                      
+           currentItems.filter((task)=>{ 
+          
                           if (filter === 'All'  ) {
                             return task;          
                           }
