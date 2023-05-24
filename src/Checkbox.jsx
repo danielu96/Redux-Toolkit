@@ -1,7 +1,13 @@
-export default function Checkbox({checked = false, onClick}) {
+export default function Checkbox({
+  checked = false,
+  // status="undone",
+   onClick}) {
     return (
       <div  onClick={onClick}>
-        {!checked ?  (
+        {
+        !checked 
+        // status="undone"
+        ?  (
           <div className="undone">
             undone           
           </div>
