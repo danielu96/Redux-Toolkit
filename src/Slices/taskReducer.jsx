@@ -6,7 +6,7 @@ const items = localStorage.getItem('tasks') !== null ? JSON.parse
 const initialState ={    
   tasks:items,
   filter:{
-    status:'All',
+    status:'',
     completed:false,
   },  
 }
