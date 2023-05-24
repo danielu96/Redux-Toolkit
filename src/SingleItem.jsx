@@ -44,7 +44,7 @@ const handleDropdownChange = (e) => {
   }
 
   ))
-  dispatch(ToggleTask(task.id))
+  // dispatch(ToggleTask(task.id))
 };
 
 
@@ -101,7 +101,7 @@ useEffect(()=>{
     // ||
      handleDropdownChange  }
   ></input>  */}
-  <p  style={ task.status==='done' ?{color:'blue',border:'solid 1px blue',width:'6rem'}:{color:'red',border:'solid 1px red',width:'6rem'}}>
+  <p  style={ task.status==='done' ?{color:'blue',border:'solid 1px blue',width:'6rem'}: task.status==='select status' ?{color:'green',border:'solid 1px green',width:'6rem'}:{color:'red',border:'solid 1px red',width:'6rem'}}>
                 {task.status==='select status'? 'not selected' : status}                
                 </p>   
 
@@ -142,7 +142,9 @@ useEffect(()=>{
   </p>  */}
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>         
-          <p  style={ completed===true || task.status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+          <p  style={
+            //  completed===true ||
+              task.status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
                 <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
