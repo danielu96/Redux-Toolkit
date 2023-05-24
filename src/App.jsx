@@ -18,6 +18,8 @@ function App() {
   const itemsPerPage = 3;
   const numberComplete = tasks.filter(t => t.completed).length;
   const numberStatus = tasks.filter(t => t.status==='done').length;
+  const numberUndoneStatus = tasks.filter(t => t.status==='undone').length;
+  const numberNotselected = tasks.filter(t => t.status==='select status').length;
 
   useEffect(() => {
     
@@ -61,7 +63,9 @@ function App() {
   return (
     <div className="App">    
      <h1>Redux-Toolkit</h1>   
-     <h3>{numberComplete} completed from {tasks.length} done= {numberStatus}</h3>  
+     <h3>
+      {/* {numberComplete}  */}
+     all task {tasks.length} / notselected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
    <ToDo /> 
    <div  style={{height:'220px' }}>
        { 
