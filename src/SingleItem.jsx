@@ -31,22 +31,16 @@ const [editMode,setEditMode] = useState(false);
 const removeHandler=()=>{  
   dispatch(removeTask(id))
 }
-const handleDropdownChange = (e) => {
-  // const { name, value } = e.target;
-  // const {status,name}=e.target
-  // setState({ ...state, [name]: value });
-  dispatch(UpdateStatus({
-    // ...task, 
+const handleDropdownChange = (e) => { 
+  dispatch(UpdateStatus({    
     id,
     name:e.target.value,    
-    status:e.target.value,
-    // completed:e.target.value
+    status:e.target.value,    
   }
 
   ))
   // dispatch(ToggleTask(task.id))
 };
-
 
 const renameHandler=(e)=>{  
   const title = e.target.value;
@@ -55,30 +49,20 @@ const renameHandler=(e)=>{
     title, 
     status  
   }))
-useEffect(()=>{
-  if(type==="update" && task){
-    setNewTitle(task.title)
-  }
-  else{
-    setNewTitle('')
-  }
-
-},[type,task])
-//      useEffect(()=>{ 
-//     if(editMode && task) {  
-//       title(task.title);
-//       setStatus(task.status)
-//     }
-//   },[task,editMode]);
-// } ;
-// useEffect(()=>{ 
-//   if(!completed && task) {  
+}
+// useEffect(()=>{
+//   if(type==="update" && task){
     
-//     dispatch(UpdateStatus(task.status))
-//     // dispatch(UpdateTask(task.title))
+//     setNewTitle(task.title)
 //   }
-// },[task,completed]);
-} 
+//   else{
+//     setNewTitle('')
+//   }
+
+// },[type,task])
+
+
+
 //  const updateTaskDone=(id, newCompleted) =>{
 //     setTasks(prev => {
 //       const newTasks = [...prev];
@@ -87,13 +71,12 @@ useEffect(()=>{
 //         });       
 //   }
 // const onToggle= () =>{completed => updateTaskDone(id, completed)} 
-// const onToggleTask= () =>{completed => dispatch(ToggleTask(id, completed))} 
+
   return (
     <>
     
     <div className='singleItem' >  
-     {/* <input type='checkbox' 
-    //  status={status="undone"}
+     {/* <input type='checkbox'     
      checked={completed}  
   onChange=
   { 
@@ -106,7 +89,7 @@ useEffect(()=>{
                 </p>   
 
    <p>{time}</p>  
-    <select style={{margin:'1rem'}} 
+    <select style={{margin:'1rem',borderRadius:'5px'}} 
       name="status"
       type="update"
       onChange={handleDropdownChange}
@@ -120,12 +103,12 @@ useEffect(()=>{
     // // {()=> setStatus({id:task.id,status:task.status})}
     >    <option>select status</option>
             <option             
-            value="undone" select={status === "undone" ? status : "" && {completed:false}}
+            value="undone" select={status === "undone" ? status : "" }
             >
             undone
         </option>
         <option          
-          value="done" select={status === "done" ? status : "" &&  {completed:true}}
+          value="done" select={status === "done" ? status : "" }
         >
           done          
             </option>
@@ -134,16 +117,10 @@ useEffect(()=>{
  {/* <Checkbox checked={completed} 
 //  onClick={  () =>   dispatch(ToggleTask(id))  } 
   />       */}
-  
-   
- {/* <p className='done'{}
-  // { task.status==="done" ? {className:'done'}:{className:'undone'}}
-  >
-  </p>  */}
+      
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>         
-          <p  style={
-            //  completed===true ||
+          <p  style={      
               task.status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
