@@ -16,10 +16,23 @@ function App() {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 3;
-  const numberComplete = tasks.filter(t => t.completed).length;
+  // const numberComplete = tasks.filter(t => t.completed).length;
   const numberStatus = tasks.filter(t => t.status==='done').length;
   const numberUndoneStatus = tasks.filter(t => t.status==='undone').length;
   const numberNotselected = tasks.filter(t => t.status==='select status').length;
+
+
+  //  const [data, setData] = useState([]);
+  //   const apiGet = () => {
+  //       fetch("../Data/data.json")
+  //           .then((response) => response.json())
+  //           .then((json) => {
+  //               setData(json);
+  //           });
+  //   };
+  //   useEffect(() => {
+  //       apiGet();
+  //   }, []);
 
   useEffect(() => {
     
