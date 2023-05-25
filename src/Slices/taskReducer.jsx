@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import React from 'react'
+import tasks from "../tasks"
 const items = localStorage.getItem('tasks') !== null ? JSON.parse
     (localStorage.getItem('tasks')) : [];
 
-const initialState ={    
-  tasks:items,
+const initialState ={   
+   tasks:tasks,
   filter:{
     status:'',
     completed:false,
@@ -51,15 +51,7 @@ const taskReducer = createSlice ({
   //       localStorage.setItem('tasks', JSON.stringify(state.tasks.map
   //         (item => item)))
   //     },
-      // ToggleTask:(state,action) =>{
-      // state.tasks.map(task =>
-      //   (task.id === action.id)
-      //     ? {...task, completed: !task.completed}
-      //     : task
-      // )           
-      //   localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-      //     (item => item)))
-      // },
+    
       ToggleTask(state, action) {
         const task = state.tasks.find(task => task.id === action.payload)
         if (task) {
@@ -68,15 +60,7 @@ const taskReducer = createSlice ({
         localStorage.setItem('tasks', JSON.stringify(state.tasks.map
           (item => item)))
       },
-      Toggler(state, action) {
-        const task = state.tasks.find(task => task.id === action.payload.id)
-        if (task) {
-          // task.status.undone = !task.status.undone
-          task.status= action.payload.status
-        }       
-        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-          (item => item)))
-      },
+     
       // UpdateTask(state, action) {
       //   state.tasks = state.tasks((task) =>
       //  task.id === action.payload.id ? action.payload : task)
@@ -103,20 +87,20 @@ const taskReducer = createSlice ({
               (item => item)))
       },
      
-update:(state,action)=>{  
-  const tasks  =   window.localStorage.getItem('tasks')  ;   
-  if (tasks) {
-         const tasksListArr = JSON.parse(tasks);            
-        tasksListArr.forEach((task) => {
-          if (task.id === action.payload.id) {       
-            task.title = action.payload.title;
-          }    });        
-           window.localStorage.setItem('tasks', JSON.stringify(state.tasks.map
-        (item => item)))
-          // window.localStorage.setItem('tasks', JSON.stringify(tasksListArr));
-          state.tasks= [...tasksListArr];     
-        }      
-}, 
+// update:(state,action)=>{  
+//   const tasks  =   window.localStorage.getItem('tasks')  ;   
+//   if (tasks) {
+//          const tasksListArr = JSON.parse(tasks);            
+//         tasksListArr.forEach((task) => {
+//           if (task.id === action.payload.id) {       
+//             task.title = action.payload.title;
+//           }    });        
+//            window.localStorage.setItem('tasks', JSON.stringify(state.tasks.map
+//         (item => item)))
+//           // window.localStorage.setItem('tasks', JSON.stringify(tasksListArr));
+//           state.tasks= [...tasksListArr];     
+//         }      
+// }, 
     removeTask:(state,action)  =>{
        state.tasks =  state.tasks.filter((task) => task.id !== action.payload);
        localStorage.setItem('tasks', JSON.stringify(state.tasks.map
@@ -133,10 +117,7 @@ setFilter:(state,action) =>{
     localStorage.setItem('tasks', JSON.stringify(state.tasks.map
       (item => item)))
   }   
- 
-
     },
-
   }
 )
 export const {AddTask,removeTask,renameTask,clearTasks,
