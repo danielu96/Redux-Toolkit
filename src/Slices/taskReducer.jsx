@@ -1,10 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios';
 import tasks from "../tasks"
 const items = localStorage.getItem('tasks') !== null ? JSON.parse
     (localStorage.getItem('tasks')) : [];
 
+    export const fetchTasks = createAsyncThunk('task/fetchTasks', () => {
+      return axios
+          .get("../Data/data.json")
+          // .get('https://jsonplaceholder.typicode.com/users')
+          .then(response => response.data)
+      // .then(console.log(data))
+    });
+
 const initialState ={   
-   tasks:tasks,
+   tasks:items,
   filter:{
     status:'',
     completed:false,
@@ -118,8 +127,29 @@ setFilter:(state,action) =>{
       (item => item)))
   }   
     },
-  }
-)
+    extraReducers: builder => {
+      builder.addCase(fetchTasks.pending, state => {
+          state.loading = true
+      })
+      builder.addCase(fetchTasks.fulfilled, (state, action) => {
+          state.loading = false
+          state.tasks = action.payload
+          state.error = ''
+      })
+      builder.addCase(fetchTasks.rejected, (state, action) => {
+          state.loading = false
+          state.tasks = []
+          state.error = action.error.message
+      })
+    }
+  
+  
+ 
+
+})
+
+
+
 export const {AddTask,removeTask,renameTask,clearTasks,
   handleChange,setEditTask,ToggleTask,changeTask,UpdateTask,update,setFilter,Toggler,GetTask,UpdateStatus} = taskReducer.actions;
 export default taskReducer.reducer
