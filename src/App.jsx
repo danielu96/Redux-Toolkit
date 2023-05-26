@@ -78,10 +78,13 @@ dispatch(setFilter('All'));
   return (
     <div className="App">    
      <h1>Redux-Toolkit</h1>   
+     {numberStatus === tasks.length && numberStatus > "0"? <p style={{color:'green',fontWeight:'bold'}}>excelent everything done !!!  </p>  : 'Your tasks'}
      <h3>
       {/* {numberComplete}  */}
      all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
-   <ToDo /> 
+  {numberStatus < "1" ? <p style={{color:'red',fontWeight:'bold'}}>you done nothing</p>: <p style={{color:'blue',fontWeight:'bold'}}>Great You done {numberStatus}</p>}
+ 
+  <ToDo /> 
    <div  style={{height:'220px' }}>
        { 
            currentItems.filter((task)=>{ 
