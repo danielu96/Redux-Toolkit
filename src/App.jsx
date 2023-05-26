@@ -82,7 +82,7 @@ dispatch(setFilter('All'));
      <h3>
       {/* {numberComplete}  */}
      all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
-  {numberStatus < "1" ? <p style={{color:'red',fontWeight:'bold'}}>you done nothing</p>: <p style={{color:'blue',fontWeight:'bold'}}>Great You done {numberStatus}</p>}
+  {numberStatus < "1" ? <p style={{color:'red',fontWeight:'bold'}}>you done nothing</p>: <p style={{color:'blue',fontWeight:'bold'}}>Great You done {numberStatus} task{numberStatus>"1"? "s":''}</p>}
  
   <ToDo /> 
    <div  style={{height:'220px' }}>
