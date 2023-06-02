@@ -27,7 +27,8 @@ const ToDo = ({showAlert}) => {
         showAlert(true, 'success', 'you added new value')
         dispatch(AddTask(
           {      
-          id:Date.now(),        
+          id:Date.now(),  
+          
           // // // id:Math.random()* 1000 ,
            title:inputRef.current.value,
            time:new Date().toLocaleString(),
@@ -75,6 +76,7 @@ const ToDo = ({showAlert}) => {
   <form  style={{ bottom:'0px'}} onSubmit={handleSubmit}>      
       <input  type="text"
       id='title'
+      maxLength="20"
             //  value={title}
              onChange={(e) => setTitle(e.target.value)}
             ref={inputRef}
