@@ -42,6 +42,10 @@ const [focusAfterClose, setFocusAfterClose] = useState(true);
   //   useEffect(() => {
   //       apiGet();
   //   }, []);
+  const deleteHandler=()=>{
+    dispatch(clearTasks()),
+    showAlert(true, 'danger', 'you just deleted all tasks')
+  }
 
   useEffect(() => {
     
@@ -146,8 +150,11 @@ dispatch(setFilter('All'));
          ))} 
    
 </div>
-<button onClick={()=>
-  dispatch(clearTasks())}>clear all</button>
+<button onClick={
+  // ()=>
+  // dispatch(clearTasks())
+  deleteHandler
+  }>clear all</button>
   <Filters/>
 
 <div style={{top:'1rem'}}>
