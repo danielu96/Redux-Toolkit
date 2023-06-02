@@ -5,7 +5,7 @@
   text-align: center;
 }
 .App{
-  width: 700px;
+  width: 900px;
   background-color: rgb(236, 243, 241);
   padding: 1rem;
   border:solid 1px #888;
@@ -151,7 +151,7 @@
   font-weight: bold;
 }
 .singleItem{
-  width:680px;
+  width:880px;
   display:flex;
   justify-content: space-between;
   background:lightGray;
@@ -165,7 +165,7 @@
 }
 .singleTask{
   display: flex;
-  width:8rem;
+  width:16rem;
   justify-content: space-between;
-  width: 5rem;
+  
 }
