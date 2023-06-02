@@ -135,7 +135,7 @@ const renameHandler=(e)=>{
               status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
-                <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
+                <button style={{height:'2rem',marginTop:'1rem',marginLeft:"auto"}}> edit </button>
         </div>
       ):
        (
@@ -143,6 +143,7 @@ const renameHandler=(e)=>{
         onSubmit={ev => {ev.preventDefault();setEditMode(false);}}
         >
           <input type="text" id='title' 
+          maxLength={20}
           value={newTitle}
          onChange= 
           // {renameHandler}
@@ -150,7 +151,7 @@ const renameHandler=(e)=>{
                 {(e)=>setNewTitle(e.target.value)}    
                        />  
                        {/* <button  onClick= { ()=>dispatch(update(task.title))} >update</button>      */}
-                       <button  onClick= {updateHandler}
+                       <button style={{marginLeft:'1rem'}} onClick= {updateHandler}
                       //  {()=> showAlert(true, 'success', 'you edit task')}
                       // {  dispatch(UpdateTask({id:id,title:newTitle,}))
                       //   } 
