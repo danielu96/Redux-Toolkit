@@ -3,18 +3,19 @@ import { useState } from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import { AddTask } from './Slices/taskReducer';
 import Alert from './Alert';
+import ModalFocusAfterClose from './Modal';
 
 
-const ToDo = () => {
+const ToDo = ({showAlert}) => {
   const inputRef = useRef()
  
   const[title,setTitle]=useState('')
     const {task}=useSelector((state)=> state.task.tasks)
     // const {taskName,setTaskName}=useState('')
-    const [alert, setAlert] = useState({ show: false, msg: '', type: ''  });
-   const showAlert = (show = false, type = '', msg = '' ) => {
-         setAlert({ show,  type, msg  });
-       };
+  //   const [alert, setAlert] = useState({ show: false, msg: '', type: ''  });
+  //  const showAlert = (show = false, type = '', msg = '' ) => {
+  //        setAlert({ show,  type, msg  });
+  //      };
     const dispatch = useDispatch();
     const handleSubmit =(e) => {
       e.preventDefault();
@@ -68,9 +69,9 @@ const ToDo = () => {
   //       // alert('Success you just added')    
   //          }
   return  ( 
-    <div style={{display:'grid',marginTop:'1rem',marginBottom:'1rem',height:'5rem',justifyContent:'center', rowGap :'1rem'}}>
+    <div style={{display:'grid',marginTop:'2rem',marginBottom:'1rem',height:'2rem',justifyContent:'center', rowGap :'1rem'}}>
        
-         <div >  {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={task} />|| "add new value"}</div>
+        
   <form  style={{ bottom:'0px'}} onSubmit={handleSubmit}>      
       <input  type="text"
       id='title'
@@ -81,6 +82,7 @@ const ToDo = () => {
             />
              <button>add</button>
     </form>
+  
     </div>
   )
 }
