@@ -105,7 +105,7 @@ dispatch(setFilter('All'));
       {/* <button onClick= {()=>setOpen(true)}>modal</button>
       {open && <ModalFocusAfterClose/>} */}
     
-     {numberStatus === tasks.length && numberStatus > "0"? <p style={{color:'green',fontWeight:'bold'}}>excelent everything done !!!  </p>  : 'Your tasks'}
+     {numberStatus === tasks.length && numberStatus > "0"? <p style={{color:'green',fontWeight:'bold'}}>excelent everything done !!!  </p>  : <p style={{color:'blue',fontWeight:'bold'}}>Your Tasks</p>}
      <h3>
       {/* {numberComplete}  */}
      all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
