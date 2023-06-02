@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from "./Checkbox";
 
  
-const SingleItem = (task) => { 
+const SingleItem = ({showAlert,id,time,title,status,...task}) => { 
  
-const {completed,id,time,title,status}=task
+// const {id,time,title,status}=task
 
 
   //   useEffect((completed)=>{ 
@@ -30,17 +30,26 @@ const [editMode,setEditMode] = useState(false);
 // const [status,setStatus]= useState('undone')
 const removeHandler=()=>{  
   dispatch(removeTask(id))
+   showAlert(true, 'danger', 'you deleted value')
 }
 const handleDropdownChange = (e) => { 
   dispatch(UpdateStatus({    
     id,
     name:e.target.value,    
-    status:e.target.value,    
-  }
-
+    status:e.target.value,  
+      
+  },
+  showAlert(true, 'success', 'you changed status')
   ))
   // dispatch(ToggleTask(task.id))
 };
+const updateHandler=()=>{
+  dispatch(UpdateTask({id:id,title:newTitle}
+  )),
+  showAlert(true, 'success', 'you updated task')
+}
+
+
 
 const renameHandler=(e)=>{  
   const title = e.target.value;
@@ -72,6 +81,8 @@ const renameHandler=(e)=>{
 //   }
 // const onToggle= () =>{completed => updateTaskDone(id, completed)} 
 
+
+
   return (
     <>
     
@@ -84,8 +95,8 @@ const renameHandler=(e)=>{
     // ||
      handleDropdownChange  }
   ></input>  */}
-  <p  style={ task.status==='done' ?{color:'blue',border:'solid 1px blue',width:'6rem'}: task.status==='select status' ?{color:'green',border:'solid 1px green',width:'6rem'}:{color:'red',border:'solid 1px red',width:'6rem'}}>
-                {task.status==='select status'? 'not selected' : status}                
+  <p  style={ status==='done' ?{color:'blue',border:'solid 1px blue',width:'6rem'}: status==='select status' ?{color:'green',border:'solid 1px green',width:'6rem'}:{color:'red',border:'solid 1px red',width:'6rem'}}>
+                {status==='select status'? 'not selected' : status}                
                 </p>   
 
    <p>{time}</p>  
@@ -121,7 +132,7 @@ const renameHandler=(e)=>{
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>         
           <p  style={      
-              task.status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+              status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
                 <button style={{height:'2rem',marginTop:'1rem'}}>edit</button>
@@ -139,8 +150,13 @@ const renameHandler=(e)=>{
                 {(e)=>setNewTitle(e.target.value)}    
                        />  
                        {/* <button  onClick= { ()=>dispatch(update(task.title))} >update</button>      */}
-                       <button  onClick= { ()=>dispatch(UpdateTask({id:task.id,title:newTitle}))} >update</button>     
+                       <button  onClick= {updateHandler}
+                      //  {()=> showAlert(true, 'success', 'you edit task')}
+                      // {  dispatch(UpdateTask({id:id,title:newTitle,}))
+                      //   } 
+                        >update</button>     
         </form> )}
+        
        {/* <button onClick={renameHandler}>update</button> */}
        
 
