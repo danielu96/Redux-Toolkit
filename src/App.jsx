@@ -6,6 +6,9 @@ import { useSelector,useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate';
 import { clearTasks, setFilter } from './Slices/taskReducer'
 import Filters from './Filters'
+import Alert from './Alert'
+import ModalFocusAfterClose from './Modal'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -16,12 +19,18 @@ function App() {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 3;
+  const [isLoading, setIsLoading]=useState(false);
   // const numberComplete = tasks.filter(t => t.completed).length;
   const numberStatus = tasks.filter(t => t.status==='done').length;
   const numberUndoneStatus = tasks.filter(t => t.status==='undone').length;
   const numberNotselected = tasks.filter(t => t.status==='select status').length;
-
-
+  const [alert, setAlert] = useState({ show: false, msg: '', type: ''  });
+   const showAlert = (show = false, type = '', msg = '' ) => {
+         setAlert({ show,  type, msg  });
+       };
+// const[showModal,setShowModal]=useState(false)
+const [open, setOpen] = useState(false);
+const [focusAfterClose, setFocusAfterClose] = useState(true);
   //  const [data, setData] = useState([]);
   //   const apiGet = () => {
   //       fetch("../Data/data.json")
@@ -71,20 +80,40 @@ function App() {
   //   }
   //   inputRef.current.value=""
   // }
+ 
+
 useEffect(()=>{
+  showAlert(true, 'success', 'WELCOME')
+  // showModal(true,"ok")
+  //  setTimeout(<Alert/>,5000);
+// setAlert(<Alert/>
+  // {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={task} />|| "WELCOME"}
+  // )
 dispatch(setFilter('All'));
+// setTimeout(<p>load </p> ,5000);
+
 },[])
-  
+// if(isLoading){
+//   return   <div >  {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={task} />|| "WELCOME"}</div>
+//   // (<p>loading...</p>)
+//   // return setTimeout(<p>load </p> ,5000);
+// } 
+
   return (
-    <div className="App">    
-     <h1>Redux-Toolkit</h1>   
+    <div className="App"> 
+    <div >
+      {/* <button onClick= {()=>setOpen(true)}>modal</button>
+      {open && <ModalFocusAfterClose/>} */}
+    
      {numberStatus === tasks.length && numberStatus > "0"? <p style={{color:'green',fontWeight:'bold'}}>excelent everything done !!!  </p>  : 'Your tasks'}
      <h3>
       {/* {numberComplete}  */}
      all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
   {numberStatus < "1" ? <p style={{color:'red',fontWeight:'bold'}}>you done nothing</p>: <p style={{color:'blue',fontWeight:'bold'}}>Great You done {numberStatus} task{numberStatus>"1"? "s":''}</p>}
  
-  <ToDo /> 
+  <ToDo showAlert={showAlert}/> 
+  <div style={{marginBottom:'1rem'}}> {alert.show && <Alert  {...alert} removeAlert={showAlert}  />|| "Redux-Toolkit"}</div>  
+  {/* <div >  {alert.show && <Alert {...alert} removeAlert={showAlert}  />|| "YOU ARE HERE"}</div> */}
    <div  style={{height:'220px' }}>
        { 
            currentItems.filter((task)=>{ 
@@ -100,6 +129,8 @@ dispatch(setFilter('All'));
        .map((task,id) => (
         <SingleItem
          key={id} 
+         showAlert={showAlert}
+         id={task.id} time={task.time} title={task.title} status={task.status}
         {...task} 
     
       
@@ -137,6 +168,7 @@ dispatch(setFilter('All'));
 
       />
       </div>
+      </div> 
     </div>
   )
 }
