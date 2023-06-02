@@ -7,10 +7,15 @@ const Alert = ({ type, msg, removeAlert, tasks }) => {
     }, 3000);
     return () => clearTimeout(timeout);
   }, [tasks]);
-  return <div   className=  {`alert alert-${type}`}  
+  return ( 
+  <>
+
+  <div   className=  {`alert alert-${type}`}  
   >   
     {msg}
-  </div>;
+  </div>
+  
+  </>)
 };
 export default Alert;
 
