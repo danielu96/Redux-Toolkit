@@ -32,7 +32,8 @@ const removeHandler=()=>{
   dispatch(removeTask(id))
    showAlert(true, 'danger', 'you deleted value')
 }
-const handleDropdownChange = (e) => { 
+const handleDropdownChange = (e) => {     
+  
   dispatch(UpdateStatus({    
     id,
     name:e.target.value,    
@@ -44,9 +45,17 @@ const handleDropdownChange = (e) => {
   // dispatch(ToggleTask(task.id))
 };
 const updateHandler=()=>{
+  // e.preventDefault();
+  if(!newTitle) 
+  showAlert(true,'danger', 'enter new value')
+  else 
+  {
+  showAlert(true,'success', 'value updated')
   dispatch(UpdateTask({id:id,title:newTitle}
-  )),
-  showAlert(true, 'success', 'you updated task')
+  ))
+  
+  // showAlert(true, 'success', 'you changed task')
+};
 }
 
 
@@ -145,6 +154,7 @@ const renameHandler=(e)=>{
           <input type="text" id='title' 
           maxLength={20}
           value={newTitle}
+          required
          onChange= 
           // {renameHandler}
         //  { (e)=>dispatch(update(e.target.value))}                  
