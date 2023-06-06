@@ -9,7 +9,7 @@ import Filters from './Filters'
 import Alert from './Alert'
 import ModalFocusAfterClose from './Modal'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import {BsFillSunFill} from 'react-icons/Bs';
+import {BsFillSunFill,BsFillMoonFill} from 'react-icons/Bs';
 
 
 function App() {
@@ -32,6 +32,13 @@ function App() {
 // const[showModal,setShowModal]=useState(false)
 const [open, setOpen] = useState(false);
 const [focusAfterClose, setFocusAfterClose] = useState(true);
+const [isDarkMode , setIsDarkMode]=useState();
+
+const toggleDarkMode = () => {
+  const newDarkMode = !isDarkMode;
+  setIsDarkMode(newDarkMode);
+  // localStorage.setItem('darkTheme', newDarkTheme);
+};
   //  const [data, setData] = useState([]);
   //   const apiGet = () => {
   //       fetch("../Data/data.json")
@@ -107,7 +114,17 @@ dispatch(setFilter('All'));
   return (
     <div className="App"> 
     <div >
-      <div className='modeContainer'><BsFillSunFill/></div>
+      <div className='modeContainer'>
+<button onClick={toggleDarkMode} style={{padding:'1px',width:'2rem',height:'2rem',backgroundColor:'transparent'}}> 
+{isDarkMode? (
+  <BsFillMoonFill style={{width:'1.2rem',height:'1.2rem'}}/>
+):(
+<BsFillSunFill style={{width:'1.2rem',height:'1.2rem'}}/>
+)
+}
+</button>
+       
+        </div>
       {/* <button onClick= {()=>setOpen(true)}>modal</button>
       {open && <ModalFocusAfterClose/>} */}
     
