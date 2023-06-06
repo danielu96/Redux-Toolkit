@@ -174,3 +174,6 @@
   width: inherit;
   justify-content: flex-end;
 }
+.darkMode{
+  background-color: #697d7d;
+}
