@@ -9,6 +9,7 @@ import Filters from './Filters'
 import Alert from './Alert'
 import ModalFocusAfterClose from './Modal'
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import {BsFillSunFill} from 'react-icons/Bs';
 
 
 function App() {
@@ -106,6 +107,7 @@ dispatch(setFilter('All'));
   return (
     <div className="App"> 
     <div >
+      <div className='modeContainer'><BsFillSunFill/></div>
       {/* <button onClick= {()=>setOpen(true)}>modal</button>
       {open && <ModalFocusAfterClose/>} */}
     
