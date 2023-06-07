@@ -1,14 +1,20 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px; */
+  display: flex;
+  /* margin:  auto auto auto auto; */
+  padding: 0rem;
   text-align: center;
+  justify-items: center;
+  /* background-color: aqua; */
 }
 .App{
-  width: 900px;
+  /* margin: auto; */
+  width: 100vw;
+  height: 100vh;
   background-color: rgb(236, 243, 241);
   padding: 1rem;
-  border:solid 1px #888;
+  justify-items: center;
+  /* border:solid 1px #888; */
  
 }
 .logo {
@@ -155,12 +161,13 @@
   display:flex;
   justify-content: space-between;
   background:lightGray;
-  margin:5px;
+  margin:5px auto;
   border-radius: 5px;
   padding: 5px 8px 5px 8px;
 }
 .singleItem:hover{
-  background-color: #697d7d;
+  background-color: #2b3030;
+  color:white;
   /* transition: filter 9ms; */
 }
 .singleTask{
@@ -177,3 +184,32 @@
 .darkMode{
   background-color: #697d7d;
 }
+.mode-btn{
+  padding: 1px;
+  width: 2rem;
+height:2rem;
+background-Color:transparent;
+border: none;
+/* button:focus-visible{border:none} */
+
+}
+
+.mode-btn:focus
+.mode-btn:focus-visible {
+  color:yellow;
+  background-color: #bb0b22;
+}
+button{
+  border: none;
+}
+button:focus,
+button:focus-visible {
+  color: #5b0ded;
+  font-weight: 500;
+  /* auto -webkit-focus-ring-color */
+  ;
+}
+/* button:hover{
+  border-bottom: 1px solid;
+  border-color: #646cff;
+} */
