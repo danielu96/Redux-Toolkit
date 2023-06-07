@@ -10,6 +10,7 @@ import Alert from './Alert'
 import ModalFocusAfterClose from './Modal'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsFillSunFill,BsFillMoonFill} from 'react-icons/Bs';
+import { toggleMode } from './Slices/modeReducer'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 const [open, setOpen] = useState(false);
 const [focusAfterClose, setFocusAfterClose] = useState(true);
 const [isDarkMode , setIsDarkMode]=useState();
+const {mode} = useSelector((state)=>state.darkMode);
 
 const toggleDarkMode = () => {
   const newDarkMode = !isDarkMode;
@@ -112,11 +114,14 @@ dispatch(setFilter('All'));
 // } 
 
   return (
-    <div className="App"> 
+    <div className="App" style={{background: mode? 'gray' : 'white'}}> 
     <div >
       <div className='modeContainer'>
-<button onClick={toggleDarkMode} style={{padding:'1px',width:'2rem',height:'2rem',backgroundColor:'transparent'}}> 
-{isDarkMode? (
+<button className='mode-btn' onClick={()=>dispatch(toggleMode())} 
+// style={{padding:'1px',width:'2rem',
+// height:'2rem',backgroundColor:'transparent',button:'focus-visible{border:none}'}}
+> 
+{mode? (
   <BsFillMoonFill style={{width:'1.2rem',height:'1.2rem'}}/>
 ):(
 <BsFillSunFill style={{width:'1.2rem',height:'1.2rem'}}/>
