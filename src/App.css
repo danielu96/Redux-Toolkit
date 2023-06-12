@@ -112,12 +112,14 @@
   color: red;
   border: solid 1px red;
  margin:1rem auto;
+ border-radius:5px
 }
 .completed{
   width:4rem;
   color: blue;
   margin:1rem auto;
   border: solid 1px blue;
+  border-radius:5px
 }
 .alertBackground{
   width: 100vw;
@@ -156,6 +158,7 @@
   /* background-color: aqua; */
   font-weight: bold;
 }
+
 .singleItem{
   width:880px;
   display:flex;
@@ -170,11 +173,28 @@
   color:white;
   /* transition: filter 9ms; */
 }
+@media only screen and (max-width: 600px)
+{
+  .singleItem{
+    display: grid;
+    width:90vw;
+    grid-template-columns: 2fr;
+    margin: auto 1rem 1rem 0;
+  }
+}
+
 .singleTask{
   display: flex;
   width:16rem;
   justify-content: space-between;
   
+}
+@media only screen and (max-width: 600px){
+  .singleTask{
+    width: 80vw;
+    justify-content: center;
+    margin: auto;
+  }
 }
 .modeContainer{
   display: flex;
