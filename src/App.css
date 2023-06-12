@@ -3,16 +3,25 @@
   display: flex;
   /* margin:  auto auto auto auto; */
   padding: 0rem;
+  margin: 0;
   text-align: center;
   justify-items: center;
   /* background-color: aqua; */
 }
+/* body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 950px;
+  min-height: 100vh;
+ 
+} */
 .App{
   /* margin: auto; */
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
   background-color: rgb(236, 243, 241);
-  padding: 1rem;
+  padding: 0,5rem;
   justify-items: center;
   /* border:solid 1px #888; */
  
@@ -177,9 +186,9 @@
 {
   .singleItem{
     display: grid;
-    width:90vw;
+    width:85vw;
     grid-template-columns: 2fr;
-    margin: auto 1rem 1rem 0;
+    margin: auto 1rem 1rem 1rem;
   }
 }
 
