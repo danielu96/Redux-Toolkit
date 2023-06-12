@@ -142,7 +142,7 @@ dispatch(setFilter('All'));
   <ToDo showAlert={showAlert}/> 
   <div style={{marginBottom:'1rem'}}> {alert.show && <Alert  {...alert} removeAlert={showAlert}  />|| "Redux-Toolkit"}</div>  
   {/* <div >  {alert.show && <Alert {...alert} removeAlert={showAlert}  />|| "YOU ARE HERE"}</div> */}
-   <div  style={{height:'220px' }}>
+   <div  style={{height:'auto' }}>
        { 
            currentItems.filter((task)=>{ 
           
