@@ -144,7 +144,7 @@ const renameHandler=(e)=>{
               status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
                 {title}                
                 </p>               
-                <button style={{height:'2rem',marginTop:'1rem',marginLeft:"auto"}}> edit </button>
+                <button style={{height:'2rem',marginTop:'1rem',marginLeft:"auto",borderRadius:'5px'}}> edit </button>
         </div>
       ):
        (
@@ -171,7 +171,7 @@ const renameHandler=(e)=>{
        {/* <button onClick={renameHandler}>update</button> */}
        
 
-<button style={{height:'2rem',marginTop:'1rem'}} onClick={removeHandler}>X</button>
+<button style={{height:'2rem',marginTop:'1rem',borderRadius:'5px'}} onClick={removeHandler}>delete</button>
     </div>
     </>
   )
