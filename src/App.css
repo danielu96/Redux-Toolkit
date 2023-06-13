@@ -16,16 +16,36 @@
   min-height: 100vh;
  
 } */
+@media only screen and (max-width: 600px){
+  .App{
+    /* margin: auto; */
+     /* width: 100vw;*/
+    
+    /* background-size: 100%; */
+    background-color: rgb(236, 243, 241);
+    /* background-attachment: fixed; */
+    /* background-repeat: repeat-x; */
+    padding: 1rem;
+    justify-items: center;
+
+    /* border:solid 1px #888; */
+   
+  }}
+
 .App{
   /* margin: auto; */
-  /* width: 100vw;
-  height: 100vh; */
+   width: 100vw;
+  height: 100vh; 
   background-color: rgb(236, 243, 241);
-  padding: 0,5rem;
+  padding: 1rem;
   justify-items: center;
+  /* border: solid 1px red; */
   /* border:solid 1px #888; */
  
 }
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -66,10 +86,14 @@
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   font-size: 1.2rem;
   gap: 5px;
+  justify-items: center;
+  padding-left: 0rem;
+ 
 }
+
 
 .pagination .page-num {
   padding: 8px 15px;
@@ -94,9 +118,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     font-size: 1.2rem;
     gap: 5px;
+    justify-items: center;
   }
 
   .pagination .page-num {
@@ -182,33 +207,43 @@
   color:white;
   /* transition: filter 9ms; */
 }
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 992px)
 {
   .singleItem{
     display: grid;
     width:85vw;
-    grid-template-columns: 2fr;
-    margin: auto 1rem 1rem 1rem;
+    /* height: 200px; */
+    grid-template-columns:1fr  ;
+    margin:  1rem auto;
+    justify-items: center;
   }
 }
 
 .singleTask{
   display: flex;
-  width:16rem;
+  width:12rem;
   justify-content: space-between;
+  margin-right: 1rem;
   
 }
 @media only screen and (max-width: 600px){
   .singleTask{
-    width: 80vw;
+    /* width: 70vw; */
     justify-content: center;
     margin: auto;
   }
 }
+
+
 .modeContainer{
   display: flex;
-  width: inherit;
+  /* width: 80vw; */
   justify-content: flex-end;
+}
+@media only screen and (max-width: 992px){
+  .modeContainer{
+    display: none;
+  }
 }
 .darkMode{
   background-color: #697d7d;
