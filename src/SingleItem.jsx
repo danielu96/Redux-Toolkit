@@ -141,7 +141,7 @@ const renameHandler=(e)=>{
 {!editMode ? (
         <div className='singleTask' onClick={() => setEditMode(prev => !prev)}>         
           <p  style={      
-              status==='done' ?{textDecoration:'line-through'}:{textDecoration:'none'}}>
+              status==='done' ?{textDecoration:'line-through',marginRight:'1rem'}:{textDecoration:'none',marginRight:'1rem'}}>
                 {title}                
                 </p>               
                 <button style={{height:'2rem',marginTop:'0.5rem',marginLeft:"auto",borderRadius:'5px'}}> edit </button>
