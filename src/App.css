@@ -194,7 +194,7 @@
 }
 
 .singleItem{
-  width:880px;
+  width:992px;
   display:flex;
   justify-content: space-between;
   background:lightGray;
@@ -221,10 +221,11 @@
 
 .singleTask{
   display: flex;
-  width:12rem;
+width:17rem;
+max-width: 17rem;
   justify-content: space-between;
   margin-right: 1rem;
-  
+
 }
 @media only screen and (max-width: 600px){
   .singleTask{
