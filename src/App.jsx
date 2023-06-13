@@ -115,7 +115,7 @@ dispatch(setFilter('All'));
 
   return (
     <div className="App" style={{background: mode? 'gray' : 'white'}}> 
-    <div >
+    
       <div className='modeContainer'>
 <button className='mode-btn' onClick={()=>dispatch(toggleMode())} 
 // style={{padding:'1px',width:'2rem',
@@ -142,7 +142,7 @@ dispatch(setFilter('All'));
   <ToDo showAlert={showAlert}/> 
   <div style={{marginBottom:'1rem'}}> {alert.show && <Alert  {...alert} removeAlert={showAlert}  />|| "Redux-Toolkit"}</div>  
   {/* <div >  {alert.show && <Alert {...alert} removeAlert={showAlert}  />|| "YOU ARE HERE"}</div> */}
-   <div  style={{height:'auto' }}>
+   <div  style={{marginBottom:'2rem' }}>
        { 
            currentItems.filter((task)=>{ 
           
@@ -172,23 +172,21 @@ dispatch(setFilter('All'));
               
               />
          ))} 
-   
+  
 </div>
-<button onClick={
-  // ()=>
-  // dispatch(clearTasks())
+<button onClick={ 
   deleteHandler
   }>clear all</button>
   <Filters/>
 
-<div style={{top:'1rem'}}>
+<div style={{paddingLeft:'0rem'}}>
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="< prev"
         renderOnZeroPageCount={null}
         containerClassName={"pagination"}
         pageLinkClassName={"page-num"}
@@ -200,7 +198,7 @@ dispatch(setFilter('All'));
       />
       </div>
       </div> 
-    </div>
+  
   )
 }
 
