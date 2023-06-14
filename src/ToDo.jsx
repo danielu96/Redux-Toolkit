@@ -82,7 +82,7 @@ const ToDo = ({showAlert}) => {
             ref={inputRef}
             //  onChange={event => AddTask(event.target.value)}           
             />
-             <button>add</button>
+             <button  style={{marginLeft:'5px',padding:'5px',borderRadius:'5px'}}>add</button>
     </form>
   
     </div>
