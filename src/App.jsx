@@ -136,7 +136,7 @@ dispatch(setFilter('All'));
      {numberStatus === tasks.length && numberStatus > "0"? <p style={{color:'green',fontWeight:'bold'}}>excelent everything done !!!  </p>  : <p style={{color:'blue',fontWeight:'bold'}}>Your Tasks</p>}
      <h3>
       {/* {numberComplete}  */}
-     all task {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
+     all tasks {tasks.length} / not selected {numberNotselected} / done {numberStatus} / undone {numberUndoneStatus}</h3>  
   {numberStatus < "1" ? <p style={{color:'red',fontWeight:'bold'}}>you done nothing</p>: <p style={{color:'blue',fontWeight:'bold'}}>Great You done {numberStatus} task{numberStatus>"1"? "s":''}</p>}
  
   <ToDo showAlert={showAlert}/> 
@@ -174,9 +174,10 @@ dispatch(setFilter('All'));
          ))} 
   
 </div>
-<button onClick={ 
+{tasks.length > "0" ? <button className='clear-btn' onClick={ 
   deleteHandler
-  }>clear all</button>
+  }>clear all tasks</button> : ''}
+
   <Filters/>
 
 <div style={{paddingLeft:'0rem'}}>
