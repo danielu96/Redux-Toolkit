@@ -204,6 +204,7 @@
 .singleItem:hover{
   background-color: #2b3030;
   color:white;
+  transition: 1s;
   /* transition: filter 9ms; */
 }
 @media only screen and (max-width: 992px)
