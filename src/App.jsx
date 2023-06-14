@@ -114,7 +114,7 @@ dispatch(setFilter('All'));
 // } 
 
   return (
-    <div className="App" style={{background: mode? 'gray' : 'white'}}> 
+    <div className="App" style={{transition:'2s',background: mode? 'gray' : 'white'}}> 
     
       <div className='modeContainer'>
 <button className='mode-btn' onClick={()=>dispatch(toggleMode())} 
