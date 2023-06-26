@@ -216,6 +216,11 @@
     grid-template-columns:1fr  ;
     margin:  1rem auto;
     justify-items: center;
+    background:white;
+    border:1px solid #888;
+    border-radius: 2rem;
+    /* box-shadow:2px 2px #26769e; */
+    box-shadow: 7px 10px 14px -4px rgba(0,0,0,0.75);
   }
 }
 
