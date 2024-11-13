@@ -249,7 +249,7 @@ max-width: 17rem;
 }
 @media only screen and (max-width: 992px){
   .modeContainer{
-    display: none;
+    display: grid;
   }
 }
 .darkMode{
